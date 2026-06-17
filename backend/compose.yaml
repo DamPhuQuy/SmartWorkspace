@@ -1,9 +1,0 @@
-services:
-  postgres:
-    image: 'postgres:17-alpine'
-    environment:
-      - 'POSTGRES_DB=smart_workspace'
-      - 'POSTGRES_PASSWORD=smart_workspace'
-      - 'POSTGRES_USER=smart_workspace'
-    ports:
-      - '5432:5432'
