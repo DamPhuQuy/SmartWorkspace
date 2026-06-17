@@ -1,0 +1,14 @@
+.env
+.env.*
+!.env.example
+
+.vscode/
+.idea/
+
+frontend/dist/
+frontend/node_modules/
+backend/build/
+backend/.gradle/
+
+*.log
+.DS_Store
