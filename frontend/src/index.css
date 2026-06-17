@@ -1,0 +1,168 @@
+@import "tailwindcss";
+
+@layer base {
+  body {
+    background-color: #f6f5f4; /* Warm Paper soft canvas */
+    color: #1a1917; /* Ink black */
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  }
+}
+
+/* Notion Color Tokens */
+:root {
+  --color-primary: #0075de; /* Notion Blue */
+  --color-primary-active: #005bab; /* Pressed Blue */
+  --color-secondary: #213183; /* Deep Indigo */
+  --color-canvas-soft: #f6f5f4; /* Warm Paper */
+  --color-surface: #ffffff; /* White surface */
+  --color-hairline: #e6e6e6; /* Hairline borders */
+  --color-ink: #1a1917; /* Ink */
+  --color-ink-secondary: #31302e; /* Warm Charcoal */
+  --color-ink-muted: #615d59; /* Stone */
+  --color-ink-faint: #a39e98; /* Ash */
+}
+
+/* Notion shadow elevation scale */
+.notion-shadow-flat {
+  border: 1px solid var(--color-hairline);
+}
+
+.notion-shadow-soft {
+  border: 1px solid var(--color-hairline);
+  box-shadow: rgba(0, 0, 0, 0.01) 0px 0.175px 1.041px, 
+              rgba(0, 0, 0, 0.02) 0px 0.8px 2.925px, 
+              rgba(0, 0, 0, 0.027) 0px 2.025px 7.847px, 
+              rgba(0, 0, 0, 0.04) 0px 4px 18px;
+}
+
+.notion-shadow-elevated {
+  border: 1px solid var(--color-hairline);
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 23px 52px;
+}
+
+/* Redefine old glassmorphism aliases to Notion specs for backward compatibility and rapid theme switching */
+.glass-panel {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-hairline);
+  box-shadow: rgba(0, 0, 0, 0.01) 0px 0.175px 1.041px;
+}
+
+.glass-card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-hairline);
+  border-radius: 12px; /* rounded.lg */
+  box-shadow: rgba(0, 0, 0, 0.01) 0px 0.175px 1.041px, 
+              rgba(0, 0, 0, 0.02) 0px 0.8px 2.925px;
+}
+
+.glass-card-hover {
+  transition: all 0.2s ease;
+}
+
+.glass-card-hover:hover {
+  transform: translateY(-1px);
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 4px 12px, 
+              rgba(0, 0, 0, 0.03) 0px 6px 16px;
+}
+
+.glass-input {
+  background-color: var(--color-surface);
+  border: 1px solid #dddddd;
+  color: var(--color-ink);
+  border-radius: 4px; /* rounded.xs */
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.glass-input:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 1px var(--color-primary);
+  outline: none;
+}
+
+/* Custom marketing pill buttons */
+.notion-btn-primary {
+  background-color: var(--color-primary);
+  color: #ffffff;
+  font-weight: 500;
+  border-radius: 9999px; /* rounded.full */
+  padding: 8px 18px;
+  font-size: 14px;
+  transition: all 0.15s ease;
+}
+
+.notion-btn-primary:hover {
+  background-color: var(--color-primary-active);
+}
+
+.notion-btn-primary:active {
+  transform: scale(0.96);
+}
+
+.notion-btn-secondary {
+  background-color: var(--color-surface);
+  color: var(--color-ink);
+  border: 1px solid var(--color-hairline);
+  font-weight: 500;
+  border-radius: 9999px;
+  padding: 8px 18px;
+  font-size: 14px;
+  box-shadow: rgba(0, 0, 0, 0.01) 0px 0.175px 1.041px;
+  transition: all 0.15s ease;
+}
+
+.notion-btn-secondary:hover {
+  background-color: var(--color-canvas-soft);
+}
+
+/* Utility buttons (8px corner radius) */
+.notion-btn-utility {
+  background-color: var(--color-surface);
+  color: var(--color-ink);
+  border: 1px solid var(--color-hairline);
+  border-radius: 8px; /* rounded.md */
+  font-weight: 500;
+  padding: 5px 14px;
+  font-size: 13px;
+  transition: all 0.15s ease;
+}
+
+.notion-btn-utility:hover {
+  background-color: var(--color-canvas-soft);
+}
+
+/* Decorative sticker palette badge colors */
+.badge-sky { background-color: #62aef01a; color: #0056b3; border: 1px solid #62aef033; }
+.badge-purple { background-color: #d6b6f620; color: #4b1a7a; border: 1px solid #d6b6f63a; }
+.badge-pink { background-color: #ff64c815; color: #8e1858; border: 1px solid #ff64c82c; }
+.badge-orange { background-color: #dd5b0010; color: #662200; border: 1px solid #dd5b0022; }
+.badge-teal { background-color: #2a9d9915; color: #0f5451; border: 1px solid #2a9d992a; }
+.badge-green { background-color: #1aae3912; color: #0d5c19; border: 1px solid #1aae3924; }
+
+/* Custom keyframe animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-canvas-soft);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #dbdbdb;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #c2c2c2;
+}
