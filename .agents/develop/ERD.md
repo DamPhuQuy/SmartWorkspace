@@ -80,7 +80,7 @@ Enum attachment_target_type {
 }
 
 Table users {
-  id uuid [pk, note: "uuidv7" ]
+  id uuid [pk, note: "uuid v7" ]
   email varchar(255) [not null, unique]
   password_hash varchar(255) [not null]
   first_name varchar(255) [not null]
@@ -91,7 +91,7 @@ Table users {
 }
 
 Table refresh_tokens {
-  id uuid [pk]
+  id uuid [pk, note: "uuid v7"]
   token varchar(512) [not null, unique]
   user_id uuid [not null, ref: > users.id]
   expiry_date timestamptz [not null]
@@ -105,7 +105,7 @@ Table refresh_tokens {
 }
 
 Table workspace_types {
-  id uuid [pk]
+  id uuid [pk, note: "uuid v7"]
   code varchar(50) [not null, unique, note: "Stable machine code, e.g. workspace, club, organization, team, community."]
   name varchar(100) [not null]
   description text
