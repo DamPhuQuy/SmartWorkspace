@@ -8,48 +8,62 @@ The project is Smart workspace
 
 ### Purpose
 
-The purpose of this project is to build a smart workspace platform that enables organizations, clubs, and teams to manage members, projects, tasks, and collaboration workflows in a centralized environment.
+The purpose of this project is to build a hybrid smart workspace and club management platform. The system combines club operations, member organization, attendance tracking, group leadership, and Jira-style project/task management in one centralized environment.
 
 ### Scope
 
-This project provides a centralized workspace management platform for organizations, clubs, and teams.
+This project provides a centralized workspace management platform for organizations, clubs, student teams, project groups, and communities.
 
 The system supports:
 
-- Workspace management
+- Workspace and club management
 - Member and role management
+- Club leadership and group leadership
+- Member grouping inside a workspace or club
 - Project and task management
-- Kanban board and task tracking
+- Jira-style issue/task tracking
+- Kanban board and workflow tracking
 - Team collaboration and communication
 - Comments and activity logs
 - File attachments and document sharing
 - Notifications and reminders
 - Event and meeting management
+- Attendance taking for meetings, events, and club sessions
 - Dashboard and reporting
 
-The platform is designed for organizations, student clubs, project teams, and communities that need a structured environment to manage work and collaboration.
+The platform is designed for student clubs, organizations, project teams, and communities that need both operational club management and structured project execution. A workspace can represent a club, organization, department, class, or team. Inside a workspace, members can be divided into groups with group leaders, and club/workspace leads can oversee membership, attendance, projects, and task delivery.
 
 Out of scope:
 
 - Video conferencing
 - Enterprise ERP features
 - Financial/accounting management
-- Human resource management (HRM)
+- Enterprise human resource management (HRM)
 - Customer relationship management (CRM)
 
 ### Key Features
 
 #### Workspace Management
 
-- Create and manage multiple workspaces or club
+- Create and manage multiple workspaces or clubs
 - Configure workspace settings and preferences
 - Support multi-organization environments
+
+#### Club & Group Management
+
+- Represent a workspace as a club, organization, project team, or community
+- Split members into groups, committees, squads, or departments
+- Assign group leaders responsible for group-level coordination
+- Assign club leads or workspace owners responsible for global club administration
+- Support member movement between groups while preserving activity history
 
 #### Member & Role Management
 
 - Invite and manage members
 - Role-Based Access Control (RBAC)
 - Workspace and project-level permissions
+- Group-level leadership and responsibility assignment
+- Membership lifecycle states such as invited, active, inactive, or removed
 
 #### Project Management
 
@@ -59,9 +73,11 @@ Out of scope:
 
 #### Task Management
 
-- Create, assign, update, and track tasks
+- Create, assign, update, and track Jira-style tasks/issues
 - Set priorities, deadlines, and statuses
 - Support task dependencies and subtasks
+- Support assignees, reporters/creators, watchers, comments, labels, and activity history
+- Support workflow status transitions such as backlog, todo, in progress, review, done, and cancelled
 
 #### Kanban Board
 
@@ -80,6 +96,13 @@ Out of scope:
 - Create and manage events and meetings
 - Event scheduling and reminders
 - Attendance tracking
+
+#### Attendance Management
+
+- Take attendance for events, meetings, and recurring club sessions
+- Track attendance status such as pending, present, absent, excused, or late
+- Allow authorized leaders to mark attendance for members in their scope
+- Support attendance reporting by workspace, group, event, and member
 
 #### File Management
 
@@ -105,17 +128,24 @@ Out of scope:
 
 ### Domain Description
 
-The Smart Workspace domain focuses on managing organizations, clubs, and teams within a collaborative digital environment. The platform enables members to organize projects, manage tasks, coordinate events, share resources, and track activities through a centralized workspace. The goal is to improve productivity, transparency, and collaboration among members while maintaining structured workflows and access control.
+The Smart Workspace domain focuses on managing clubs, organizations, groups, and project teams within a collaborative digital environment. The platform is hybrid: it supports operational club management, such as membership, groups, leaders, events, and attendance, while also supporting Jira-style work management, such as projects, tasks, boards, workflow statuses, assignments, subtasks, dependencies, and activity tracking.
+
+The goal is to improve transparency, accountability, attendance discipline, and delivery tracking among members while maintaining structured workflows and role-based access control.
 
 ### Core Concepts
 
 - **Workspace** – A collaborative environment that contains members, projects, tasks, events, and resources.
+- **Club** – A workspace type used for student clubs, communities, and organizations.
 - **Member** – A user who participates in one or more workspaces.
+- **Group** – A subdivision inside a workspace or club, such as a department, squad, committee, or project group.
+- **Group Leader** – A member responsible for managing a group, coordinating members, reviewing progress, and taking attendance within the group.
+- **Club Lead / Workspace Lead** – A member with top-level responsibility for a club/workspace, including membership, roles, groups, projects, events, and attendance oversight.
 - **Role** – Defines permissions and access levels within a workspace.
 - **Project** – A collection of related tasks and activities aimed at achieving specific objectives.
-- **Task** – A unit of work assigned to members and tracked through its lifecycle.
+- **Task / Issue** – A Jira-style unit of work assigned to members and tracked through workflow statuses.
 - **Board** – A visual representation of task workflows (e.g., Kanban board).
 - **Event** – Meetings, activities, or schedules organized within a workspace.
+- **Attendance Record** – A record of a member's attendance status for an event, meeting, or session.
 - **Comment** – Communication attached to tasks, projects, or events.
 - **Notification** – System-generated updates informing members about relevant activities.
 - **Activity Log** – A record of important actions performed within the workspace.
@@ -124,13 +154,23 @@ The Smart Workspace domain focuses on managing organizations, clubs, and teams w
 
 - A member must belong to a workspace before accessing its resources.
 - Every workspace must have at least one owner.
+- A club/workspace should have at least one club lead or owner responsible for administration.
+- A member can belong to zero or more groups inside a workspace, depending on workspace policy.
+- A group must belong to exactly one workspace.
+- Every active group should have at least one active group leader.
+- A group leader can manage only groups and members within their authorized scope unless granted broader permissions.
 - Only authorized members can create, modify, or delete projects and tasks.
 - A task must belong to exactly one project.
 - A task can only be assigned to members of the corresponding workspace.
+- Jira-style task workflow transitions must follow the configured board/workflow rules.
+- Task status and Kanban column movement must remain consistent.
 - Role permissions determine which actions a member can perform.
 - All important changes must be recorded in the activity log.
 - Deleted workspaces cannot be accessed by members.
 - Events must have a valid organizer.
+- Attendance can only be recorded for members of the corresponding workspace.
+- Attendance can only be marked by authorized members such as club leads, workspace admins, event organizers, or group leaders within scope.
+- Attendance changes must be auditable.
 - Notifications are generated when significant actions occur, such as task assignment, status changes, or event updates.
 
 ---
@@ -150,12 +190,22 @@ The Smart Workspace domain focuses on managing organizations, clubs, and teams w
 - Workspace owners can invite members.
 - Workspace administrators can configure workspace settings.
 - Users can join workspaces through invitations.
+- Workspaces can be used as clubs, organizations, teams, or project spaces.
+
+### Club & Group Management
+
+- Club leads can create, update, archive, and delete groups.
+- Club leads can assign members to groups.
+- Club leads can assign or remove group leaders.
+- Group leaders can view and manage members within their assigned groups according to permissions.
+- Members can view their group membership and group-level activities.
 
 ### Role & Permission Management
 
 - The system shall support Role-Based Access Control (RBAC).
 - Workspace owners can assign roles to members.
 - Permissions shall be enforced on all protected resources.
+- Permissions shall support workspace-level, project-level, and group-level scopes.
 
 ### Project Management
 
@@ -169,6 +219,8 @@ The Smart Workspace domain focuses on managing organizations, clubs, and teams w
 - Tasks shall support priorities, due dates, and statuses.
 - Tasks can contain comments and attachments.
 - Tasks can be organized using Kanban boards.
+- Tasks should follow Jira-style semantics, including issue status, assignee, creator/reporter, priority, labels, subtasks, dependencies, comments, and activity history.
+- Task workflow transitions should be configurable per board or project where practical.
 
 ### Collaboration
 
@@ -181,6 +233,13 @@ The Smart Workspace domain focuses on managing organizations, clubs, and teams w
 - Users can create and manage events.
 - Members can register attendance.
 - The system shall send event reminders.
+
+### Attendance Management
+
+- Authorized users can take attendance for events, meetings, and club sessions.
+- Attendance records shall include member, event/session, status, marker, and timestamp.
+- Attendance reports shall be available by workspace, group, event, and member.
+- Attendance updates shall be recorded in activity logs.
 
 ### Notification System
 
@@ -287,6 +346,7 @@ Responsibilities:
 - Workspace membership management
 - Member invitations
 - Member lifecycle management
+- Member grouping and group assignment
 
 Dependencies:
 
@@ -301,6 +361,7 @@ Dependencies:
 Responsibilities:
 
 - Workspace creation and configuration
+- Club/workspace type and settings
 - Workspace settings
 - Workspace ownership management
 - Member access control
@@ -321,11 +382,31 @@ Responsibilities:
 - Permission assignment
 - Access control rules
 - Authorization policies
+- Workspace, project, and group-level authorization scope
 
 Dependencies:
 
 - Workspace Module
 - Authentication Module
+- Database
+
+---
+
+#### Club & Group Management Module
+
+Responsibilities:
+
+- Club/group structure management
+- Group creation, update, archive, and deletion
+- Group membership assignment
+- Group leader assignment
+- Group-level access control support
+
+Dependencies:
+
+- Workspace Module
+- User & Member Management Module
+- Role & Permission Module
 - Database
 
 ---
@@ -351,10 +432,13 @@ Dependencies:
 Responsibilities:
 
 - Task creation and assignment
+- Jira-style issue lifecycle management
 - Task status transitions
 - Priority management
 - Due date management
 - Subtask management
+- Task dependency and watcher management
+- Workflow consistency between task status and board column
 
 Dependencies:
 
@@ -410,6 +494,26 @@ Dependencies:
 
 ---
 
+#### Attendance Management Module
+
+Responsibilities:
+
+- Attendance session and record management
+- Attendance marking by authorized leaders
+- Attendance status tracking
+- Group and workspace attendance reports
+- Attendance audit logging
+
+Dependencies:
+
+- Event Management Module
+- Workspace Module
+- Club & Group Management Module
+- User & Member Management Module
+- Activity Log Module
+
+---
+
 #### Notification Module
 
 Responsibilities:
@@ -417,12 +521,14 @@ Responsibilities:
 - Real-time notifications
 - Email notifications
 - Event publishing and consumption
+- Attendance reminders and absence notifications
 
 Dependencies:
 
 - User Module
 - Task Module
 - Event Module
+- Attendance Management Module
 
 ---
 
@@ -449,11 +555,16 @@ Responsibilities:
 - Dashboard statistics
 - Productivity metrics
 - Workspace reports
+- Attendance reports
+- Group progress reports
+- Jira-style task flow metrics such as backlog count, cycle time, and overdue tasks
 
 Dependencies:
 
 - Project Module
 - Task Module
+- Attendance Management Module
+- Club & Group Management Module
 - Activity Log Module
 
 ---
@@ -516,4 +627,3 @@ Always follow the daylight design language specified in [.agents/DESIGN.md](file
 - **Accents**: Notion Blue `#0075de` for primary CTAs and links. Accent colors (purple, pink, teal, etc.) are strictly for decorative sticker labels.
 - **Borders & Radii**: Pill shape for primary CTAs, `8px` rounded for utility buttons, and `4px` rounded for form inputs.
 - **Elevation**: Gentle hairline borders, using soft layered shadows (`notion-shadow-soft`) rather than heavy drop-shadows.
-

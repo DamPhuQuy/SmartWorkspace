@@ -12,3 +12,6 @@ backend/.gradle/
 
 *.log
 .DS_Store
+
+.codex
+
