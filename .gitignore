@@ -12,3 +12,7 @@ backend/.gradle/
 
 *.log
 .DS_Store
+
+.agents/
+.docs/
+AGENTS.md
