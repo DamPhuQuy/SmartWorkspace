@@ -59,11 +59,11 @@ There are two common meanings:
 
 For Smart Workspace, a safe recommended model is:
 
-| Branch | Environment | Deployment Style |
-| --- | --- | --- |
-| `feature/*` | none | CI only |
-| `develop` | staging | automatic deploy after CI |
-| `main` | production | deploy after CI, preferably with approval |
+| Branch      | Environment | Deployment Style                          |
+| ----------- | ----------- | ----------------------------------------- |
+| `feature/*` | none        | CI only                                   |
+| `develop`   | staging     | automatic deploy after CI                 |
+| `main`      | production  | deploy after CI, preferably with approval |
 
 ---
 
@@ -86,16 +86,16 @@ flowchart LR
 
 Important concepts:
 
-| Concept | Meaning |
-| --- | --- |
-| Workflow | A YAML file that defines automation, such as CI or deployment. |
-| Trigger | Event that starts a workflow, such as `push`, `pull_request`, or manual dispatch. |
-| Job | A group of steps that runs on a runner. |
-| Step | A single command or reusable action. |
-| Runner | Machine that executes the job, such as `ubuntu-latest`. |
-| Artifact | File produced by the pipeline, such as test reports, build outputs, or Docker images. |
-| Secret | Sensitive value stored securely in GitHub Actions, such as passwords or tokens. |
-| Environment | Deployment target such as staging or production. |
+| Concept     | Meaning                                                                               |
+| ----------- | ------------------------------------------------------------------------------------- |
+| Workflow    | A YAML file that defines automation, such as CI or deployment.                        |
+| Trigger     | Event that starts a workflow, such as `push`, `pull_request`, or manual dispatch.     |
+| Job         | A group of steps that runs on a runner.                                               |
+| Step        | A single command or reusable action.                                                  |
+| Runner      | Machine that executes the job, such as `ubuntu-latest`.                               |
+| Artifact    | File produced by the pipeline, such as test reports, build outputs, or Docker images. |
+| Secret      | Sensitive value stored securely in GitHub Actions, such as passwords or tokens.       |
+| Environment | Deployment target such as staging or production.                                      |
 
 ---
 
@@ -208,13 +208,13 @@ Meaning:
 Frontend job:
 
 ```yaml
-  frontend:
-    name: Frontend
-    runs-on: ubuntu-latest
+frontend:
+  name: Frontend
+  runs-on: ubuntu-latest
 
-    defaults:
-      run:
-        working-directory: frontend
+  defaults:
+    run:
+      working-directory: frontend
 ```
 
 Meaning:
@@ -273,29 +273,29 @@ CI should not read real production secrets from `.env`. Use GitHub Actions secre
 
 Current development variables:
 
-| Variable | Purpose |
-| --- | --- |
-| `POSTGRES_DB` | PostgreSQL database name |
-| `POSTGRES_USER` | PostgreSQL username |
-| `POSTGRES_PASSWORD` | PostgreSQL password |
-| `JWT_SECRET` | Secret used to sign JWTs |
-| `JWT_ACCESS_TOKEN_EXPIRATION_MS` | Access token lifetime |
-| `JWT_REFRESH_TOKEN_EXPIRATION_MS` | Refresh token lifetime |
-| `SERVER_PORT` | Backend port |
-| `FRONTEND_PORT` | Frontend port |
+| Variable                          | Purpose                  |
+| --------------------------------- | ------------------------ |
+| `POSTGRES_DB`                     | PostgreSQL database name |
+| `POSTGRES_USER`                   | PostgreSQL username      |
+| `POSTGRES_PASSWORD`               | PostgreSQL password      |
+| `JWT_SECRET`                      | Secret used to sign JWTs |
+| `JWT_ACCESS_TOKEN_EXPIRATION_MS`  | Access token lifetime    |
+| `JWT_REFRESH_TOKEN_EXPIRATION_MS` | Refresh token lifetime   |
+| `SERVER_PORT`                     | Backend port             |
+| `FRONTEND_PORT`                   | Frontend port            |
 
 Recommended GitHub secret naming:
 
-| Secret | Used For |
-| --- | --- |
-| `STAGING_POSTGRES_PASSWORD` | Staging database access |
-| `STAGING_JWT_SECRET` | Staging auth signing |
-| `PRODUCTION_POSTGRES_PASSWORD` | Production database access |
-| `PRODUCTION_JWT_SECRET` | Production auth signing |
-| `DOCKERHUB_USERNAME` | Container registry login |
-| `DOCKERHUB_TOKEN` | Container registry push |
-| `CLOUDINARY_URL` | File storage integration |
-| `GMAIL_SMTP_PASSWORD` | Email notification delivery |
+| Secret                         | Used For                    |
+| ------------------------------ | --------------------------- |
+| `STAGING_POSTGRES_PASSWORD`    | Staging database access     |
+| `STAGING_JWT_SECRET`           | Staging auth signing        |
+| `PRODUCTION_POSTGRES_PASSWORD` | Production database access  |
+| `PRODUCTION_JWT_SECRET`        | Production auth signing     |
+| `DOCKERHUB_USERNAME`           | Container registry login    |
+| `DOCKERHUB_TOKEN`              | Container registry push     |
+| `CLOUDINARY_URL`               | File storage integration    |
+| `GMAIL_SMTP_PASSWORD`          | Email notification delivery |
 
 Rules:
 
@@ -396,15 +396,15 @@ Use these rules for Smart Workspace:
 
 ### Failure Categories
 
-| Failure Type | Example | First Response |
-| --- | --- | --- |
-| Backend test failure | `./gradlew test` fails | Open uploaded backend test report and fix the failing test or code. |
-| Backend configuration failure | Missing `JWT_SECRET` | Add test-safe env vars to the workflow step. |
-| Frontend dependency failure | `npm ci` fails | Check `package-lock.json`, Node version, and dependency changes. |
-| Frontend build failure | TypeScript or Vite build error | Reproduce with `npm run build` locally. |
-| Flaky test | Same test passes and fails without code changes | Quarantine only with an issue and owner; do not ignore silently. |
-| Infrastructure failure | GitHub runner outage or registry timeout | Rerun once after checking provider status. |
-| Security failure | Secret scan or dependency scan fails | Treat as blocking until reviewed. |
+| Failure Type                  | Example                                         | First Response                                                      |
+| ----------------------------- | ----------------------------------------------- | ------------------------------------------------------------------- |
+| Backend test failure          | `./gradlew test` fails                          | Open uploaded backend test report and fix the failing test or code. |
+| Backend configuration failure | Missing `JWT_SECRET`                            | Add test-safe env vars to the workflow step.                        |
+| Frontend dependency failure   | `npm ci` fails                                  | Check `package-lock.json`, Node version, and dependency changes.    |
+| Frontend build failure        | TypeScript or Vite build error                  | Reproduce with `npm run build` locally.                             |
+| Flaky test                    | Same test passes and fails without code changes | Quarantine only with an issue and owner; do not ignore silently.    |
+| Infrastructure failure        | GitHub runner outage or registry timeout        | Rerun once after checking provider status.                          |
+| Security failure              | Secret scan or dependency scan fails            | Treat as blocking until reviewed.                                   |
 
 ### Triage Workflow
 
@@ -434,14 +434,14 @@ npm run build
 
 Recommended retry policy:
 
-| Situation | Retry? | Rule |
-| --- | --- | --- |
-| Deterministic test failure | No | Fix the code or test. |
-| Missing configuration | No | Fix workflow env or secrets. |
-| Network timeout | Yes | Retry once. |
-| GitHub runner issue | Yes | Retry once after checking status. |
-| Flaky test | Limited | Create an issue, assign owner, and fix quickly. |
-| Deployment failure | Careful | Do not retry production deploys blindly. Check deployed state first. |
+| Situation                  | Retry?  | Rule                                                                 |
+| -------------------------- | ------- | -------------------------------------------------------------------- |
+| Deterministic test failure | No      | Fix the code or test.                                                |
+| Missing configuration      | No      | Fix workflow env or secrets.                                         |
+| Network timeout            | Yes     | Retry once.                                                          |
+| GitHub runner issue        | Yes     | Retry once after checking status.                                    |
+| Flaky test                 | Limited | Create an issue, assign owner, and fix quickly.                      |
+| Deployment failure         | Careful | Do not retry production deploys blindly. Check deployed state first. |
 
 ### Pull Request Communication
 
@@ -522,12 +522,12 @@ Common registries:
 
 Recommended image tags:
 
-| Tag | Meaning |
-| --- | --- |
+| Tag             | Meaning                                |
+| --------------- | -------------------------------------- |
 | `sha-<git-sha>` | Immutable image for exact traceability |
-| `develop` | Latest staging candidate |
-| `main` | Latest production candidate |
-| `v1.2.3` | Release tag |
+| `develop`       | Latest staging candidate               |
+| `main`          | Latest production candidate            |
+| `v1.2.3`        | Release tag                            |
 
 Avoid using only `latest` for deployments. It makes rollback and audit harder.
 
@@ -679,10 +679,10 @@ This requires the Flyway Gradle plugin or a project task. If the project relies 
 
 There are two common strategies.
 
-| Strategy | How It Works | Tradeoff |
-| --- | --- | --- |
-| Application-start migration | Spring Boot runs Flyway on startup. | Simple, but multiple app instances can make rollout behavior harder to reason about. |
-| Dedicated migration job | A separate CI/CD job runs Flyway before app deployment. | More controlled and preferred for staging/production. |
+| Strategy                    | How It Works                                            | Tradeoff                                                                             |
+| --------------------------- | ------------------------------------------------------- | ------------------------------------------------------------------------------------ |
+| Application-start migration | Spring Boot runs Flyway on startup.                     | Simple, but multiple app instances can make rollout behavior harder to reason about. |
+| Dedicated migration job     | A separate CI/CD job runs Flyway before app deployment. | More controlled and preferred for staging/production.                                |
 
 Recommended for Smart Workspace:
 
@@ -718,12 +718,12 @@ Rules:
 
 Examples:
 
-| Change | Risk | Safer Approach |
-| --- | --- | --- |
-| Rename column | Existing code breaks | Add new column, dual write, backfill, later remove old column. |
-| Add `NOT NULL` column | Existing rows invalid | Add nullable, backfill, then add constraint. |
-| Drop table | Data loss | Archive, verify no reads, drop in later release. |
-| Large backfill | Long locks | Batch backfill outside request path. |
+| Change                | Risk                  | Safer Approach                                                 |
+| --------------------- | --------------------- | -------------------------------------------------------------- |
+| Rename column         | Existing code breaks  | Add new column, dual write, backfill, later remove old column. |
+| Add `NOT NULL` column | Existing rows invalid | Add nullable, backfill, then add constraint.                   |
+| Drop table            | Data loss             | Archive, verify no reads, drop in later release.               |
+| Large backfill        | Long locks            | Batch backfill outside request path.                           |
 
 ---
 
@@ -784,15 +784,15 @@ Quality gates are checks that must pass before merge or deploy.
 
 Recommended gates:
 
-| Gate | Feature Branch | Pull Request | `develop` | `main` |
-| --- | --- | --- | --- | --- |
-| Backend tests | optional local | required | required | required |
-| Frontend build | optional local | required | required | required |
-| Frontend lint | recommended | required | required | required |
-| Integration tests | optional | recommended | required | required |
-| Docker image build | optional | recommended | required | required |
-| Security scan | optional | recommended | required | required |
-| Deployment approval | none | none | optional | required |
+| Gate                | Feature Branch | Pull Request | `develop` | `main`   |
+| ------------------- | -------------- | ------------ | --------- | -------- |
+| Backend tests       | optional local | required     | required  | required |
+| Frontend build      | optional local | required     | required  | required |
+| Frontend lint       | recommended    | required     | required  | required |
+| Integration tests   | optional       | recommended  | required  | required |
+| Docker image build  | optional       | recommended  | required  | required |
+| Security scan       | optional       | recommended  | required  | required |
+| Deployment approval | none           | none         | optional  | required |
 
 Keep gates strict on protected branches, but avoid making early feature work painfully slow.
 
@@ -877,9 +877,9 @@ production
 
 Recommended settings:
 
-| Environment | Approval | Secrets |
-| --- | --- | --- |
-| `staging` | Optional | Staging database, JWT, SMTP, storage |
+| Environment  | Approval | Secrets                                 |
+| ------------ | -------- | --------------------------------------- |
+| `staging`    | Optional | Staging database, JWT, SMTP, storage    |
 | `production` | Required | Production database, JWT, SMTP, storage |
 
 Production environment rules:
@@ -946,12 +946,12 @@ Recommended additions:
 
 Useful artifact examples:
 
-| Artifact | Purpose |
-| --- | --- |
-| `backend/build/reports/tests/test` | Debug JUnit test failures |
-| `backend/build/reports/jacoco` | Debug coverage gaps when JaCoCo is added |
-| `frontend/dist` | Inspect production frontend output |
-| Docker image digest | Verify exactly what was deployed |
+| Artifact                           | Purpose                                  |
+| ---------------------------------- | ---------------------------------------- |
+| `backend/build/reports/tests/test` | Debug JUnit test failures                |
+| `backend/build/reports/jacoco`     | Debug coverage gaps when JaCoCo is added |
+| `frontend/dist`                    | Inspect production frontend output       |
+| Docker image digest                | Verify exactly what was deployed         |
 
 ---
 
@@ -999,17 +999,17 @@ curl -f https://app.example.com
 
 Monitor these for at least 15 to 30 minutes after production deployment:
 
-| Metric | Warning Sign |
-| --- | --- |
-| HTTP 5xx rate | Backend errors after deploy |
-| HTTP 4xx spike | Auth, routing, or frontend/API contract issue |
-| API latency p95/p99 | Slow queries, locks, resource pressure |
-| JVM memory | Memory leak or bad runtime sizing |
-| JVM CPU | Hot loop, traffic spike, bad query pattern |
-| Database connections | Pool exhaustion or connection leak |
-| PostgreSQL locks | Risky migration or long transaction |
-| Redis errors | Cache/session/notification problems |
-| Frontend error rate | Runtime JS error or broken API response |
+| Metric               | Warning Sign                                  |
+| -------------------- | --------------------------------------------- |
+| HTTP 5xx rate        | Backend errors after deploy                   |
+| HTTP 4xx spike       | Auth, routing, or frontend/API contract issue |
+| API latency p95/p99  | Slow queries, locks, resource pressure        |
+| JVM memory           | Memory leak or bad runtime sizing             |
+| JVM CPU              | Hot loop, traffic spike, bad query pattern    |
+| Database connections | Pool exhaustion or connection leak            |
+| PostgreSQL locks     | Risky migration or long transaction           |
+| Redis errors         | Cache/session/notification problems           |
+| Frontend error rate  | Runtime JS error or broken API response       |
 
 ### Logs to Check
 
@@ -1240,17 +1240,17 @@ main
 
 ## 22. Glossary
 
-| Term | Meaning |
-| --- | --- |
-| CI | Continuous Integration. Automatically validates code changes. |
-| CD | Continuous Delivery or Continuous Deployment. Automatically prepares or performs releases. |
-| Runner | Machine that executes workflow jobs. |
-| Workflow | GitHub Actions YAML automation file. |
-| Job | Group of steps inside a workflow. |
-| Step | Single action or command inside a job. |
-| Artifact | Output saved from a workflow run. |
-| Secret | Sensitive value stored securely by GitHub. |
-| Environment | Deployment target with its own secrets and approval rules. |
-| Smoke Test | Small post-deployment test that checks the application is alive. |
-| Rollback | Returning to a previous known-good version. |
-| Image Digest | Immutable identifier for a Docker image. |
+| Term         | Meaning                                                                                    |
+| ------------ | ------------------------------------------------------------------------------------------ |
+| CI           | Continuous Integration. Automatically validates code changes.                              |
+| CD           | Continuous Delivery or Continuous Deployment. Automatically prepares or performs releases. |
+| Runner       | Machine that executes workflow jobs.                                                       |
+| Workflow     | GitHub Actions YAML automation file.                                                       |
+| Job          | Group of steps inside a workflow.                                                          |
+| Step         | Single action or command inside a job.                                                     |
+| Artifact     | Output saved from a workflow run.                                                          |
+| Secret       | Sensitive value stored securely by GitHub.                                                 |
+| Environment  | Deployment target with its own secrets and approval rules.                                 |
+| Smoke Test   | Small post-deployment test that checks the application is alive.                           |
+| Rollback     | Returning to a previous known-good version.                                                |
+| Image Digest | Immutable identifier for a Docker image.                                                   |
