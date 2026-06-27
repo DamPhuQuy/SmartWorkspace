@@ -43,29 +43,23 @@ public class WorkSpaceMemberEntity {
     @UuidGenerator(style = UuidGenerator.Style.VERSION_7)
     private UUID id;
 
-    @Column(
+    @ManyToOne(
+        fetch = FetchType.LAZY,
+        optional = false
+    )
+    @JoinColumn(
         name = "workspace_id",
         nullable = false
     )
-    @ManyToOne(
-        fetch = FetchType.LAZY,
-        optional = false
-    )
-    @JoinColumn(
-        name = "workspace_id"
-    )
     private WorkSpaceEntity workspace;
 
-    @Column(
-        name = "user_id",
-        nullable = false
-    )
     @ManyToOne(
         fetch = FetchType.LAZY,
         optional = false
     )
     @JoinColumn(
-        name = "user_id"
+        name = "user_id",
+        nullable = false
     )
     private UserEntity user;
 

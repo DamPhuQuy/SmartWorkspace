@@ -1,10 +1,16 @@
 package com.workspace.infrastructure.database.entity.workspace;
 
+import java.util.UUID;
+
+import org.hibernate.annotations.UuidGenerator;
+
 import com.workspace.infrastructure.database.entity.user.RoleEntity;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
@@ -29,17 +35,16 @@ import lombok.NoArgsConstructor;
 @Builder
 public class WorkspaceMemberRoleEntity {
 
-    @Column(
-        name = "workspace_member_id",
-        nullable = false
-    )
+    @Id
+    @GeneratedValue
+    @UuidGenerator(style = UuidGenerator.Style.VERSION_7)
+    private UUID id;
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "workspace_member_id", nullable = false)
     private WorkSpaceMemberEntity workspaceMember;
 
-    @Column(
-        name = "role_id",
-        nullable = false
-    )
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "role_id", nullable = false)
     private RoleEntity role;
 }
