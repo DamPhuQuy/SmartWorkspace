@@ -3,9 +3,9 @@ Project smart_workspace {
 }
 
 Table users {
-  id uuid [pk]
+  id uuid [pk, not null, default: `gen_random_uuid()`]
   email varchar(255) [not null, unique]
-  phone varchar(20) [unique]
+  phone varchar(20) [null, unique]
   password_hash varchar(255) [not null]
 
   online_status boolean [default: false]
@@ -18,11 +18,13 @@ Table user_profiles {
   // @OneToOne
   user_id uuid [pk, ref: - users.id]
 
-  full_name varchar(255) [not null]
-  avatar_url varchar(1024)
-  bio text
+  first_name varchar(100) [not null]
+  last_name varchar(100) [null]
 
-  discord_id varchar(50) [unique]
+  avatar_url varchar(1024) [null]
+  bio text [null]
+
+  discord_id varchar(50) [unique, null]
 
   created_at timestamptz
   updated_at timestamptz
@@ -37,7 +39,7 @@ Table workspaces {
 
   // @ManyToOne
   owner_id uuid [not null, ref: > users.id]
-  // Field keeps the foreign key uses with @MappedBy('owner_id')
+  // Field does not keep the foreign key uses with @MappedBy('owner_id')
 
   created_at timestamptz
   updated_at timestamptz
@@ -48,11 +50,11 @@ Table workspace_members {
 
   // @ManyToOne
   workspace_id uuid [not null, ref: > workspaces.id]
-  // Field keeps the foreign key uses with @MappedBy('workspace_id')
+  // Field does not keep the foreign key uses with @MappedBy('workspace_id')
 
   // @ManyToOne
   user_id uuid [not null, ref: > users.id]
-  // Field keeps the foreign key uses with @MappedBy('user_id')
+  // Field does not keep the foreign key uses with @MappedBy('user_id')
 
   joined_at timestamptz
 
@@ -66,6 +68,7 @@ Table roles {
 
   // @ManyToOne
   workspace_id uuid [not null, ref: > workspaces.id]
+  // Field does not keep the foreign key uses with @MappedBy('workspace_id')
 
   name varchar(100) [not null]
 
@@ -86,10 +89,10 @@ Table permissions {
 Table role_permissions { // Join table for many-to-many relationship between roles and permissions
 
   role_id uuid [not null, ref: > roles.id]
-  // Field keeps the foreign key uses with @MappedBy('role_id')
+  // Field does not keep the foreign key uses with @MappedBy('role_id')
 
   permission_id uuid [not null, ref: > permissions.id]
-  // Field keeps the foreign key uses with @MappedBy('permission_id')
+  // Field does not keep the foreign key uses with @MappedBy('permission_id')
 
   indexes {
     (role_id, permission_id) [pk]
@@ -100,11 +103,11 @@ Table workspace_member_roles { // Join table for many-to-many relationship betwe
 
   // @ManyToOne
   workspace_member_id uuid [not null, ref: > workspace_members.id]
-  // Field keeps the foreign key uses with @MappedBy('workspace_member_id')
+  // Field does not keep the foreign key uses with @MappedBy('workspace_member_id')
 
   // @ManyToOne
   role_id uuid [not null, ref: > roles.id] // Foreign key to roles
-  // Field keeps the foreign key uses with @MappedBy('role_id')
+  // Field does not keep the foreign key uses with @MappedBy('role_id')
 
   indexes {
     (workspace_member_id, role_id) [pk]
@@ -116,7 +119,7 @@ Table teams {
 
   // @ManyToOne
   workspace_id uuid [not null, ref: > workspaces.id]
-  // Field keeps the foreign key uses with @MappedBy('workspace_id')
+  // Field does not keep the foreign key uses with @MappedBy('workspace_id')
 
   name varchar(255) [not null]
 
@@ -133,11 +136,11 @@ Table team_members {
 
   // @ManyToOne
   team_id uuid [not null, ref: > teams.id]
-  // Field keeps the foreign key uses with @MappedBy('team_id')
+  // Field does not keep the foreign key uses with @MappedBy('team_id')
 
   // @ManyToOne
   workspace_member_id uuid [not null, ref: > workspace_members.id]
-  // Field keeps the foreign key uses with @MappedBy('workspace_member_id')
+  // Field does not keep the foreign key uses with @MappedBy('workspace_member_id')
 
   joined_at timestamptz
 
@@ -151,7 +154,7 @@ Table workspace_meeting_schedules {
 
   // @ManyToOne
   workspace_id uuid [not null, ref: > workspaces.id]
-  // Field keeps the foreign key uses with @MappedBy('workspace_id')
+  // Field does not keep the foreign key uses with @MappedBy('workspace_id')
 
   title varchar(255) [not null]
 
@@ -171,7 +174,7 @@ Table workspace_member_warnings {
 
   // @ManyToOne
   workspace_member_id uuid [not null, ref: > workspace_members.id]
-  // Field keeps the foreign key uses with @MappedBy('workspace_member_id')
+  // Field does not keep the foreign key uses with @MappedBy('workspace_member_id')
 
   warning_type varchar(100) [not null]
   description text
@@ -189,7 +192,7 @@ Table assignments {
 
   // @ManyToOne
   workspace_id uuid [not null, ref: > workspaces.id]
-  // Field keeps the foreign key uses with @MappedBy('workspace_id')
+  // Field does not keep the foreign key uses with @MappedBy('workspace_id')
 
   title varchar(255) [not null]
 
@@ -212,11 +215,11 @@ Table assignment_assignees {
 
   // @ManyToOne
   assignment_id uuid [not null, ref: > assignments.id]
-  // Field keeps the foreign key uses with @MappedBy('assignment_id')
+  // Field does not keep the foreign key uses with @MappedBy('assignment_id')
 
   // @ManyToOne
   workspace_member_id uuid [not null, ref: > workspace_members.id]
-  // Field keeps the foreign key uses with @MappedBy('workspace_member_id')
+  // Field does not keep the foreign key uses with @MappedBy('workspace_member_id')
 
   assigned_at timestamptz
 
@@ -230,7 +233,7 @@ Table assignment_submissions {
 
   // @ManyToOne
   assignment_assignee_id uuid [not null, ref: > assignment_assignees.id]
-  // Field keeps the foreign key uses with @MappedBy('assignment_assignee_id')
+  // Field does not keep the foreign key uses with @MappedBy('assignment_assignee_id')
 
   submission_url varchar(1024) [not null]
   submitted_at timestamptz
@@ -248,7 +251,7 @@ Table workspace_member_letters {
 
   // @ManyToOne
   workspace_member_id uuid [not null, ref: > workspace_members.id]
-  // Field keeps the foreign key uses with @MappedBy('workspace_member_id')
+  // Field does not keep the foreign key uses with @MappedBy('workspace_member_id')
 
   letter_type varchar(100) [not null]
   description text
@@ -267,7 +270,7 @@ Table workspace_member_letters {
 Table workspace_member_absence_letters {
   // @OneToOne
   letter_id uuid [pk, ref: - workspace_member_letters.id]
-  // Field keeps the foreign key uses with @MappedBy('letter_id')
+  // Field does not keep the foreign key uses with @MappedBy('letter_id')
 
   workspace_meeting_schedule_id uuid [not null, ref: > workspace_meeting_schedules.id]
 
@@ -281,7 +284,7 @@ Table workspace_member_absence_letters {
 Table workspace_member_late_letters {
   // @OneToOne
   letter_id uuid [pk, ref: - workspace_member_letters.id]
-  // Field keeps the foreign key uses with @MappedBy('letter_id')
+  // Field does not keep the foreign key uses with @MappedBy('letter_id')
 
   workspace_meeting_schedule_id uuid [not null, ref: > workspace_meeting_schedules.id]
 
@@ -296,11 +299,11 @@ Table workspace_member_late_letters {
 Table workspace_member_assignment_postpone_letters {
   // @OneToOne
   letter_id uuid [pk, ref: - workspace_member_letters.id]
-  // Field keeps the foreign key uses with @MappedBy('letter_id')
+  // Field does not keep the foreign key uses with @MappedBy('letter_id')
 
   // @ManyToOne
   assignment_id uuid [not null, ref: > assignments.id]
-  // Field keeps the foreign key uses with @MappedBy('assignment_id')
+  // Field does not keep the foreign key uses with @MappedBy('assignment_id')
 
   assignment_snapshot varchar(255)
 
@@ -317,7 +320,7 @@ Table refresh_tokens {
 
   // @ManyToOne
   user_id uuid [not null, ref: > users.id]
-  // Field keeps the foreign key uses with @MappedBy('user_id')
+  // Field does not keep the foreign key uses with @MappedBy('user_id')
 
   token varchar(255) [not null, unique]
   expires_at timestamptz [not null]
@@ -326,3 +329,5 @@ Table refresh_tokens {
   created_at timestamptz
   updated_at timestamptz
 }
+
+// note: mappedBy = "user" in UserEntity shows this relationship is managed by field "user" in UserProfileEntity
