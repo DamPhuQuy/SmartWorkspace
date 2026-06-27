@@ -7,6 +7,8 @@ import com.workspace.infrastructure.database.entity.user.UserProfileEntity;
 
 public class UserMapper {
 
+    private UserMapper() {}
+
     public static User toDomain(UserEntity entity) {
         if (entity == null) {
             return null;

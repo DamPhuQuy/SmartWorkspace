@@ -3,7 +3,7 @@ package com.workspace.infrastructure.database.adapter.out.user;
 import java.util.Optional;
 import java.util.UUID;
 
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import com.workspace.application.port.out.UserRepositoryPort;
 import com.workspace.domain.model.user.User;
@@ -13,7 +13,7 @@ import com.workspace.infrastructure.database.repository.user.UserJpaRepository;
 
 import lombok.RequiredArgsConstructor;
 
-@Component
+@Repository
 @RequiredArgsConstructor
 public class UserRepositoryAdapter implements UserRepositoryPort {
 
