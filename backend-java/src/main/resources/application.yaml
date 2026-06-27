@@ -5,21 +5,25 @@ spring:
     url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/smart_workspace}
     username: ${SPRING_DATASOURCE_USERNAME:smart_workspace}
     password: ${SPRING_DATASOURCE_PASSWORD:smart_workspace}
+    driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
       ddl-auto: validate
-    open-in-view: false
     properties:
       hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: true
+    show-sql: true
   flyway:
     enabled: true
+    baseline-on-migrate: true
 
 server:
   port: ${SERVER_PORT:8080}
 
-app:
-  auth:
-    jwt-secret: ${JWT_SECRET}
-    access-token-expiration-ms: ${JWT_ACCESS_TOKEN_EXPIRATION_MS:900000}
-    refresh-token-expiration-ms: ${JWT_REFRESH_TOKEN_EXPIRATION_MS:2592000000}
+application:
+  security:
+    jwt:
+      secret-key: ${JWT_SECRET:change-this-64-character-development-secret-before-production-use}
+      access-token-expiration-ms: ${JWT_ACCESS_TOKEN_EXPIRATION_MS:900000}
+      refresh-token-expiration-ms: ${JWT_REFRESH_TOKEN_EXPIRATION_MS:2592000000}
