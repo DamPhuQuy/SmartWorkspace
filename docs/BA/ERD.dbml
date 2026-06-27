@@ -12,6 +12,10 @@ Table users {
 
   created_at timestamptz
   updated_at timestamptz
+
+  indexes {
+    email | phone
+  }
 }
 
 Table user_profiles {
@@ -33,13 +37,13 @@ Table user_profiles {
 Table workspaces {
   id uuid [pk]
 
-  name varchar(255) [not null]
+  name varchar(255) [not null, unique]
   slug varchar(255) [not null, unique]
   description text
 
   // @ManyToOne
-  owner_id uuid [not null, ref: > users.id]
-  // Field does not keep the foreign key uses with @MappedBy('owner_id')
+  // WorkspaceEntity.owner
+  owner_id uuid [not null, ref: - users.id]
 
   created_at timestamptz
   updated_at timestamptz
@@ -49,12 +53,14 @@ Table workspace_members {
   id uuid [pk]
 
   // @ManyToOne
+  // WorkspaceMemberEntity.workspace
+  // field keeps foreign key so using @JoinColumn(name = "workspace_id")
   workspace_id uuid [not null, ref: > workspaces.id]
-  // Field does not keep the foreign key uses with @MappedBy('workspace_id')
 
   // @ManyToOne
+  // WorkspaceMemberEntity.user
+  // field keeps foreign key so using @JoinColumn(name = "user_id")
   user_id uuid [not null, ref: > users.id]
-  // Field does not keep the foreign key uses with @MappedBy('user_id')
 
   joined_at timestamptz
 
@@ -69,6 +75,7 @@ Table roles {
   // @ManyToOne
   workspace_id uuid [not null, ref: > workspaces.id]
   // Field does not keep the foreign key uses with @MappedBy('workspace_id')
+  // Field keeps foreign key so using @JoinColumn(name = "workspace_id")
 
   name varchar(100) [not null]
 
