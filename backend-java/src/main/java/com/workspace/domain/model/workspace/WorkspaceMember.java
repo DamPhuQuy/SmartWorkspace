@@ -12,9 +12,9 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class WorkSpaceMember {
+public class WorkspaceMember {
     private UUID id;
-    private WorkSpace workspace;
+    private Workspace workspace;
     private User user;
     private Instant joinedAt;
 }

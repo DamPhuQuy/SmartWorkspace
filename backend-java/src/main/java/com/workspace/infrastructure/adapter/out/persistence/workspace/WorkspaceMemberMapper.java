@@ -1,33 +1,33 @@
 package com.workspace.infrastructure.adapter.out.persistence.workspace;
 
-import com.workspace.domain.model.workspace.WorkSpaceMember;
+import com.workspace.domain.model.workspace.WorkspaceMember;
 import com.workspace.infrastructure.adapter.out.persistence.user.UserMapper;
 
-public class WorkSpaceMemberMapper {
+public class WorkspaceMemberMapper {
 
-    private WorkSpaceMemberMapper() {}
+    private WorkspaceMemberMapper() {}
 
-    public static WorkSpaceMember toDomain(WorkSpaceMemberEntity entity) {
+    public static WorkspaceMember toDomain(WorkspaceMemberEntity entity) {
         if (entity == null) {
             return null;
         }
 
-        return WorkSpaceMember.builder()
+        return WorkspaceMember.builder()
                 .id(entity.getId())
-                .workspace(WorkSpaceMapper.toDomain(entity.getWorkspace()))
+                .workspace(WorkspaceMapper.toDomain(entity.getWorkspace()))
                 .user(UserMapper.toDomain(entity.getUser()))
                 .joinedAt(entity.getJoinedAt())
                 .build();
     }
 
-    public static WorkSpaceMemberEntity toEntity(WorkSpaceMember domain) {
+    public static WorkspaceMemberEntity toEntity(WorkspaceMember domain) {
         if (domain == null) {
             return null;
         }
 
-        return WorkSpaceMemberEntity.builder()
+        return WorkspaceMemberEntity.builder()
                 .id(domain.getId())
-                .workspace(WorkSpaceMapper.toEntity(domain.getWorkspace()))
+                .workspace(WorkspaceMapper.toEntity(domain.getWorkspace()))
                 .user(UserMapper.toEntity(domain.getUser()))
                 .joinedAt(domain.getJoinedAt())
                 .build();

@@ -1,18 +1,18 @@
 package com.workspace.infrastructure.adapter.out.persistence.workspace;
 
-import com.workspace.domain.model.workspace.WorkSpace;
+import com.workspace.domain.model.workspace.Workspace;
 import com.workspace.infrastructure.adapter.out.persistence.user.UserMapper;
 
-public class WorkSpaceMapper {
+public class WorkspaceMapper {
 
-    private WorkSpaceMapper() {}
+    private WorkspaceMapper() {}
 
-    public static WorkSpace toDomain(WorkSpaceEntity entity) {
+    public static Workspace toDomain(WorkspaceEntity entity) {
         if (entity == null) {
             return null;
         }
 
-        return WorkSpace.builder()
+        return Workspace.builder()
                 .id(entity.getId())
                 .name(entity.getName())
                 .slug(entity.getSlug())
@@ -23,12 +23,12 @@ public class WorkSpaceMapper {
                 .build();
     }
 
-    public static WorkSpaceEntity toEntity(WorkSpace domain) {
+    public static WorkspaceEntity toEntity(Workspace domain) {
         if (domain == null) {
             return null;
         }
 
-        return WorkSpaceEntity.builder()
+        return WorkspaceEntity.builder()
                 .id(domain.getId())
                 .name(domain.getName())
                 .slug(domain.getSlug())

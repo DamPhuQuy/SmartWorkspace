@@ -36,7 +36,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Getter
 @Builder
-public class WorkSpaceMemberEntity {
+public class WorkspaceMemberEntity {
 
     @Id
     @GeneratedValue
@@ -51,7 +51,7 @@ public class WorkSpaceMemberEntity {
         name = "workspace_id",
         nullable = false
     )
-    private WorkSpaceEntity workspace;
+    private WorkspaceEntity workspace;
 
     @ManyToOne(
         fetch = FetchType.LAZY,

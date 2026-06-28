@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class WorkSpace {
+public class Workspace {
     private UUID id;
     private String name;
     private String slug;
