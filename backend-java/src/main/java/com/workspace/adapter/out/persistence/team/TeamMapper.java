@@ -1,8 +1,7 @@
-package com.workspace.infrastructure.database.mapper.team;
+package com.workspace.adapter.out.persistence.team;
 
 import com.workspace.domain.model.team.Team;
-import com.workspace.infrastructure.database.entity.team.TeamEntity;
-import com.workspace.infrastructure.database.mapper.workspace.WorkSpaceMapper;
+import com.workspace.adapter.out.persistence.workspace.WorkSpaceMapper;
 
 public class TeamMapper {
 

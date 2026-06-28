@@ -1,12 +1,13 @@
-package com.workspace.infrastructure.database.entity.team;
+package com.workspace.adapter.out.persistence.team;
 
 import java.time.Instant;
 import java.util.UUID;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.annotations.UuidGenerator;
 
-import com.workspace.infrastructure.database.entity.workspace.WorkSpaceMemberEntity;
+import com.workspace.adapter.out.persistence.workspace.WorkSpaceEntity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -24,11 +25,11 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Table(
-    name = "team_members",
+    name = "teams",
     uniqueConstraints = {
         @UniqueConstraint(
-            name = "uk_team_member",
-            columnNames = {"team_id", "workspace_member_id"}
+            name = "uk_workspace_team_name",
+            columnNames = {"workspace_id", "name"}
         )
     }
 )
@@ -36,7 +37,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Getter
 @Builder
-public class TeamMemberEntity {
+public class TeamEntity {
 
     @Id
     @GeneratedValue
@@ -44,14 +45,17 @@ public class TeamMemberEntity {
     private UUID id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "team_id", nullable = false)
-    private TeamEntity team;
+    @JoinColumn(name = "workspace_id", nullable = false)
+    private WorkSpaceEntity workspace;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "workspace_member_id", nullable = false)
-    private WorkSpaceMemberEntity workspaceMember;
+    @Column(name = "name", nullable = false)
+    private String name;
 
-    @Column(name = "joined_at", nullable = false, updatable = false)
+    @Column(name = "created_at", nullable = false, updatable = false)
     @CreationTimestamp
-    private Instant joinedAt;
+    private Instant createdAt;
+
+    @Column(name = "updated_at", nullable = false)
+    @UpdateTimestamp
+    private Instant updatedAt;
 }

@@ -1,13 +1,12 @@
-package com.workspace.infrastructure.database.entity.team;
+package com.workspace.adapter.out.persistence.team;
 
 import java.time.Instant;
 import java.util.UUID;
 
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.annotations.UuidGenerator;
 
-import com.workspace.infrastructure.database.entity.workspace.WorkSpaceEntity;
+import com.workspace.adapter.out.persistence.workspace.WorkSpaceMemberEntity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -25,11 +24,11 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Table(
-    name = "teams",
+    name = "team_members",
     uniqueConstraints = {
         @UniqueConstraint(
-            name = "uk_workspace_team_name",
-            columnNames = {"workspace_id", "name"}
+            name = "uk_team_member",
+            columnNames = {"team_id", "workspace_member_id"}
         )
     }
 )
@@ -37,7 +36,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Getter
 @Builder
-public class TeamEntity {
+public class TeamMemberEntity {
 
     @Id
     @GeneratedValue
@@ -45,17 +44,14 @@ public class TeamEntity {
     private UUID id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "workspace_id", nullable = false)
-    private WorkSpaceEntity workspace;
+    @JoinColumn(name = "team_id", nullable = false)
+    private TeamEntity team;
 
-    @Column(name = "name", nullable = false)
-    private String name;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "workspace_member_id", nullable = false)
+    private WorkSpaceMemberEntity workspaceMember;
 
-    @Column(name = "created_at", nullable = false, updatable = false)
+    @Column(name = "joined_at", nullable = false, updatable = false)
     @CreationTimestamp
-    private Instant createdAt;
-
-    @Column(name = "updated_at", nullable = false)
-    @UpdateTimestamp
-    private Instant updatedAt;
+    private Instant joinedAt;
 }

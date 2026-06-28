@@ -1,4 +1,4 @@
-package com.workspace.infrastructure.database.adapter.out.team;
+package com.workspace.adapter.out.persistence.team;
 
 import java.util.List;
 import java.util.Optional;
@@ -8,9 +8,6 @@ import org.springframework.stereotype.Repository;
 
 import com.workspace.application.port.out.team.TeamMemberRepositoryPort;
 import com.workspace.domain.model.team.TeamMember;
-import com.workspace.infrastructure.database.entity.team.TeamMemberEntity;
-import com.workspace.infrastructure.database.mapper.team.TeamMemberMapper;
-import com.workspace.infrastructure.database.repository.team.TeamMemberJpaRepository;
 import lombok.RequiredArgsConstructor;
 
 @Repository
