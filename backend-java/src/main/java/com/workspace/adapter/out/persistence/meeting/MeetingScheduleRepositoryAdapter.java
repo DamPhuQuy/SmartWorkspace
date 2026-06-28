@@ -1,4 +1,4 @@
-package com.workspace.infrastructure.database.adapter.out.meeting;
+package com.workspace.adapter.out.persistence.meeting;
 
 import java.util.List;
 import java.util.Optional;
@@ -8,9 +8,6 @@ import org.springframework.stereotype.Repository;
 
 import com.workspace.application.port.out.meeting.MeetingScheduleRepositoryPort;
 import com.workspace.domain.model.meeting.MeetingSchedule;
-import com.workspace.infrastructure.database.entity.meeting.MeetingScheduleEntity;
-import com.workspace.infrastructure.database.mapper.meeting.MeetingScheduleMapper;
-import com.workspace.infrastructure.database.repository.meeting.MeetingScheduleJpaRepository;
 import lombok.RequiredArgsConstructor;
 
 @Repository
