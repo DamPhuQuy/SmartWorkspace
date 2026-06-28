@@ -27,3 +27,13 @@ application:
       secret-key: ${JWT_SECRET:change-this-64-character-development-secret-before-production-use}
       access-token-expiration-ms: ${JWT_ACCESS_TOKEN_EXPIRATION_MS:900000}
       refresh-token-expiration-ms: ${JWT_REFRESH_TOKEN_EXPIRATION_MS:2592000000}
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+
+scalar:
+  enabled: true
+  path: /scalar
