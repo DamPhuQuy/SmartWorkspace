@@ -1,10 +1,9 @@
-package com.workspace.infrastructure.database.repository.workspace;
+package com.workspace.adapter.out.persistence.workspace;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import org.springframework.data.jpa.repository.JpaRepository;
-import com.workspace.infrastructure.database.entity.workspace.WorkSpaceMemberEntity;
 
 public interface WorkSpaceMemberJpaRepository extends JpaRepository<WorkSpaceMemberEntity, UUID> {
     Optional<WorkSpaceMemberEntity> findByWorkspaceIdAndUserId(UUID workspaceId, UUID userId);

@@ -1,4 +1,4 @@
-package com.workspace.infrastructure.database.adapter.out.workspace;
+package com.workspace.adapter.out.persistence.workspace;
 
 import java.util.List;
 import java.util.Optional;
@@ -8,9 +8,6 @@ import org.springframework.stereotype.Repository;
 
 import com.workspace.application.port.out.workspace.WorkSpaceMemberRepositoryPort;
 import com.workspace.domain.model.workspace.WorkSpaceMember;
-import com.workspace.infrastructure.database.entity.workspace.WorkSpaceMemberEntity;
-import com.workspace.infrastructure.database.mapper.workspace.WorkSpaceMemberMapper;
-import com.workspace.infrastructure.database.repository.workspace.WorkSpaceMemberJpaRepository;
 import lombok.RequiredArgsConstructor;
 
 @Repository

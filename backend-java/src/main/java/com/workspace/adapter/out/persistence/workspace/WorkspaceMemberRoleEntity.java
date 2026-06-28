@@ -1,10 +1,10 @@
-package com.workspace.infrastructure.database.entity.workspace;
+package com.workspace.adapter.out.persistence.workspace;
 
 import java.util.UUID;
 
 import org.hibernate.annotations.UuidGenerator;
 
-import com.workspace.infrastructure.database.entity.user.RoleEntity;
+import com.workspace.adapter.out.persistence.user.RoleEntity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
