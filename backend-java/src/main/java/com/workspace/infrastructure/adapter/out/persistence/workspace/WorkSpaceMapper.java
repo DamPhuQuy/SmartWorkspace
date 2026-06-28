@@ -1,7 +1,7 @@
-package com.workspace.adapter.out.persistence.workspace;
+package com.workspace.infrastructure.adapter.out.persistence.workspace;
 
 import com.workspace.domain.model.workspace.WorkSpace;
-import com.workspace.adapter.out.persistence.user.UserMapper;
+import com.workspace.infrastructure.adapter.out.persistence.user.UserMapper;
 
 public class WorkSpaceMapper {
 
