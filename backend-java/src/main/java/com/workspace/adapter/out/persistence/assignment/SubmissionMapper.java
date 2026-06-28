@@ -1,7 +1,6 @@
-package com.workspace.infrastructure.database.mapper.assignment;
+package com.workspace.adapter.out.persistence.assignment;
 
 import com.workspace.domain.model.assignment.Submission;
-import com.workspace.infrastructure.database.entity.assignment.SubmissionEntity;
 
 public class SubmissionMapper {
 

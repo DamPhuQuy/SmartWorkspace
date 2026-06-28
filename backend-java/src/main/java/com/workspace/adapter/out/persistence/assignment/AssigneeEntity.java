@@ -1,4 +1,4 @@
-package com.workspace.infrastructure.database.entity.assignment;
+package com.workspace.adapter.out.persistence.assignment;
 
 import java.time.Instant;
 import java.util.UUID;
@@ -6,7 +6,7 @@ import java.util.UUID;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UuidGenerator;
 
-import com.workspace.infrastructure.database.entity.workspace.WorkSpaceMemberEntity;
+import com.workspace.adapter.out.persistence.workspace.WorkSpaceMemberEntity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

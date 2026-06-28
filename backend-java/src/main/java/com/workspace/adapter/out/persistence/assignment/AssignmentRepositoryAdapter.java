@@ -1,4 +1,4 @@
-package com.workspace.infrastructure.database.adapter.out.assignment;
+package com.workspace.adapter.out.persistence.assignment;
 
 import java.util.List;
 import java.util.Optional;
@@ -8,9 +8,6 @@ import org.springframework.stereotype.Repository;
 
 import com.workspace.application.port.out.assignment.AssignmentRepositoryPort;
 import com.workspace.domain.model.assignment.Assignment;
-import com.workspace.infrastructure.database.entity.assignment.AssignmentEntity;
-import com.workspace.infrastructure.database.mapper.assignment.AssignmentMapper;
-import com.workspace.infrastructure.database.repository.assignment.AssignmentJpaRepository;
 import lombok.RequiredArgsConstructor;
 
 @Repository

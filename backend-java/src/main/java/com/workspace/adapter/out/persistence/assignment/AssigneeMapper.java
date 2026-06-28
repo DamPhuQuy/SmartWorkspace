@@ -1,8 +1,7 @@
-package com.workspace.infrastructure.database.mapper.assignment;
+package com.workspace.adapter.out.persistence.assignment;
 
 import com.workspace.domain.model.assignment.Assignee;
-import com.workspace.infrastructure.database.entity.assignment.AssigneeEntity;
-import com.workspace.infrastructure.database.mapper.workspace.WorkSpaceMemberMapper;
+import com.workspace.adapter.out.persistence.workspace.WorkSpaceMemberMapper;
 
 public class AssigneeMapper {
 
