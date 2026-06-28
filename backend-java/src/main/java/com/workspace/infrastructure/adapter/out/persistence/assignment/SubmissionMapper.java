@@ -1,4 +1,4 @@
-package com.workspace.adapter.out.persistence.assignment;
+package com.workspace.infrastructure.adapter.out.persistence.assignment;
 
 import com.workspace.domain.model.assignment.Submission;
 
