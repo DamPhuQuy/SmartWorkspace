@@ -1,4 +1,4 @@
-package com.workspace.adapter.out.persistence.warning;
+package com.workspace.infrastructure.adapter.out.persistence.warning;
 
 import java.util.List;
 import java.util.Optional;

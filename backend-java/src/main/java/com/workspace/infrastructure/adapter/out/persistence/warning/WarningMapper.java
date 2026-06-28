@@ -1,7 +1,7 @@
-package com.workspace.adapter.out.persistence.warning;
+package com.workspace.infrastructure.adapter.out.persistence.warning;
 
 import com.workspace.domain.model.warning.Warning;
-import com.workspace.adapter.out.persistence.workspace.WorkSpaceMemberMapper;
+import com.workspace.infrastructure.adapter.out.persistence.workspace.WorkSpaceMemberMapper;
 
 public class WarningMapper {
 
