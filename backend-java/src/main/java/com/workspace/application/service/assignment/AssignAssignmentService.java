@@ -7,14 +7,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.workspace.application.port.in.assignment.AssignAssignmentUseCase;
-import com.workspace.application.port.out.assignment.AssigneeRepositoryPort;
 import com.workspace.application.port.out.assignment.AssignmentRepositoryPort;
-import com.workspace.application.port.out.workspace.WorkSpaceMemberRepositoryPort;
+import com.workspace.application.port.out.workspace.WorkspaceRepositoryPort;
 import com.workspace.domain.exception.DomainException;
 import com.workspace.domain.exception.ResourceNotFoundException;
 import com.workspace.domain.model.assignment.Assignee;
 import com.workspace.domain.model.assignment.Assignment;
-import com.workspace.domain.model.workspace.WorkSpaceMember;
+import com.workspace.domain.model.workspace.WorkspaceMember;
 
 import lombok.RequiredArgsConstructor;
 
@@ -23,23 +22,22 @@ import lombok.RequiredArgsConstructor;
 public class AssignAssignmentService implements AssignAssignmentUseCase {
 
     private final AssignmentRepositoryPort assignmentRepositoryPort;
-    private final WorkSpaceMemberRepositoryPort workSpaceMemberRepositoryPort;
-    private final AssigneeRepositoryPort assigneeRepositoryPort;
-
+    private final WorkspaceRepositoryPort workspaceRepositoryPort;
+        
     @Override
     @Transactional
     public Assignee assignAssignment(Command command) {
         Assignment assignment = assignmentRepositoryPort.findById(command.assignmentId())
                 .orElseThrow(() -> new ResourceNotFoundException("Assignment with ID " + command.assignmentId() + " not found"));
 
-        WorkSpaceMember member = workSpaceMemberRepositoryPort.findById(command.workspaceMemberId())
+        WorkspaceMember member = workspaceRepositoryPort.findMemberById(command.workspaceMemberId())
                 .orElseThrow(() -> new ResourceNotFoundException("Workspace member with ID " + command.workspaceMemberId() + " not found"));
 
         if (!assignment.getWorkspace().getId().equals(member.getWorkspace().getId())) {
             throw new DomainException("Workspace member must belong to the same workspace as the assignment");
         }
 
-        if (assigneeRepositoryPort.existsByAssignmentIdAndWorkspaceMemberId(command.assignmentId(), command.workspaceMemberId())) {
+        if (assignmentRepositoryPort.existsAssigneeByAssignmentIdAndWorkspaceMemberId(command.assignmentId(), command.workspaceMemberId())) {
             throw new DomainException("Member is already assigned to this assignment");
         }
 
@@ -50,6 +48,6 @@ public class AssignAssignmentService implements AssignAssignmentUseCase {
                 .assignedAt(Instant.now())
                 .build();
 
-        return assigneeRepositoryPort.save(assignee);
+        return assignmentRepositoryPort.saveAssignee(assignee);
     }
 }

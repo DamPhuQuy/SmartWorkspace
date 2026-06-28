@@ -8,9 +8,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.workspace.application.port.in.warning.IssueWarningUseCase;
 import com.workspace.application.port.out.warning.WarningRepositoryPort;
-import com.workspace.application.port.out.workspace.WorkSpaceMemberRepositoryPort;
+import com.workspace.application.port.out.workspace.WorkspaceRepositoryPort;
 import com.workspace.domain.exception.ResourceNotFoundException;
-import com.workspace.domain.model.workspace.WorkSpaceMember;
+import com.workspace.domain.model.workspace.WorkspaceMember;
 import com.workspace.domain.model.warning.Warning;
 
 import lombok.RequiredArgsConstructor;
@@ -20,12 +20,12 @@ import lombok.RequiredArgsConstructor;
 public class IssueWarningService implements IssueWarningUseCase {
 
     private final WarningRepositoryPort warningRepositoryPort;
-    private final WorkSpaceMemberRepositoryPort workSpaceMemberRepositoryPort;
+    private final WorkspaceRepositoryPort workspaceRepositoryPort;
 
     @Override
     @Transactional
     public Warning issueWarning(Command command) {
-        WorkSpaceMember member = workSpaceMemberRepositoryPort.findById(command.workspaceMemberId())
+        WorkspaceMember member = workspaceRepositoryPort.findMemberById(command.workspaceMemberId())
                 .orElseThrow(() -> new ResourceNotFoundException("Workspace member with ID " + command.workspaceMemberId() + " not found"));
 
         Warning warning = Warning.builder()

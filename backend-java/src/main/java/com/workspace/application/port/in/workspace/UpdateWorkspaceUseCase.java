@@ -1,10 +1,10 @@
 package com.workspace.application.port.in.workspace;
 
 import java.util.UUID;
-import com.workspace.domain.model.workspace.WorkSpace;
+import com.workspace.domain.model.workspace.Workspace;
 
 public interface UpdateWorkspaceUseCase {
-    WorkSpace updateWorkspace(Command command);
+    Workspace updateWorkspace(Command command);
 
     record Command(
         UUID id,

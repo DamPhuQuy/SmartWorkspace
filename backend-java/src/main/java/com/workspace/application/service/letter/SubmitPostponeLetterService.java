@@ -9,14 +9,13 @@ import org.springframework.transaction.annotation.Transactional;
 import com.workspace.application.port.in.letter.SubmitPostponeLetterUseCase;
 import com.workspace.application.port.out.assignment.AssignmentRepositoryPort;
 import com.workspace.application.port.out.letter.LetterRepositoryPort;
-import com.workspace.application.port.out.letter.PostponeLetterRepositoryPort;
-import com.workspace.application.port.out.workspace.WorkSpaceMemberRepositoryPort;
+import com.workspace.application.port.out.workspace.WorkspaceRepositoryPort;
 import com.workspace.domain.exception.DomainException;
 import com.workspace.domain.exception.ResourceNotFoundException;
 import com.workspace.domain.model.assignment.Assignment;
 import com.workspace.domain.model.letter.Letter;
 import com.workspace.domain.model.letter.PostponeLetter;
-import com.workspace.domain.model.workspace.WorkSpaceMember;
+import com.workspace.domain.model.workspace.WorkspaceMember;
 
 import lombok.RequiredArgsConstructor;
 
@@ -25,14 +24,13 @@ import lombok.RequiredArgsConstructor;
 public class SubmitPostponeLetterService implements SubmitPostponeLetterUseCase {
 
     private final LetterRepositoryPort letterRepositoryPort;
-    private final PostponeLetterRepositoryPort postponeLetterRepositoryPort;
-    private final WorkSpaceMemberRepositoryPort workSpaceMemberRepositoryPort;
-    private final AssignmentRepositoryPort assignmentRepositoryPort;
+    private final WorkspaceRepositoryPort workspaceRepositoryPort;
+            private final AssignmentRepositoryPort assignmentRepositoryPort;
 
     @Override
     @Transactional
     public PostponeLetter submitPostponeLetter(Command command) {
-        WorkSpaceMember member = workSpaceMemberRepositoryPort.findById(command.workspaceMemberId())
+        WorkspaceMember member = workspaceRepositoryPort.findMemberById(command.workspaceMemberId())
                 .orElseThrow(() -> new ResourceNotFoundException("Workspace member with ID " + command.workspaceMemberId() + " not found"));
 
         Assignment assignment = assignmentRepositoryPort.findById(command.assignmentId())
@@ -69,6 +67,6 @@ public class SubmitPostponeLetterService implements SubmitPostponeLetterUseCase 
                 .requestedDeadline(command.requestedDeadline())
                 .build();
 
-        return postponeLetterRepositoryPort.save(postponeLetter);
+        return letterRepositoryPort.savePostpone(postponeLetter);
     }
 }

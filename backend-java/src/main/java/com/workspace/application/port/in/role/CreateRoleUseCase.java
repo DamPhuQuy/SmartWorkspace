@@ -1,7 +1,7 @@
 package com.workspace.application.port.in.role;
 
 import java.util.UUID;
-import com.workspace.domain.model.user.Role;
+import com.workspace.domain.model.role.Role;
 
 public interface CreateRoleUseCase {
     Role createRole(Command command);

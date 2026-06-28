@@ -8,13 +8,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.workspace.application.port.in.assignment.CreateAssignmentUseCase;
 import com.workspace.application.port.out.assignment.AssignmentRepositoryPort;
-import com.workspace.application.port.out.workspace.WorkSpaceMemberRepositoryPort;
-import com.workspace.application.port.out.workspace.WorkSpaceRepositoryPort;
+import com.workspace.application.port.out.workspace.WorkspaceRepositoryPort;
 import com.workspace.domain.exception.DomainException;
 import com.workspace.domain.exception.ResourceNotFoundException;
 import com.workspace.domain.model.assignment.Assignment;
-import com.workspace.domain.model.workspace.WorkSpace;
-import com.workspace.domain.model.workspace.WorkSpaceMember;
+import com.workspace.domain.model.workspace.Workspace;
+import com.workspace.domain.model.workspace.WorkspaceMember;
 
 import lombok.RequiredArgsConstructor;
 
@@ -23,16 +22,15 @@ import lombok.RequiredArgsConstructor;
 public class CreateAssignmentService implements CreateAssignmentUseCase {
 
     private final AssignmentRepositoryPort assignmentRepositoryPort;
-    private final WorkSpaceRepositoryPort workSpaceRepositoryPort;
-    private final WorkSpaceMemberRepositoryPort workSpaceMemberRepositoryPort;
-
+    private final WorkspaceRepositoryPort workspaceRepositoryPort;
+    
     @Override
     @Transactional
     public Assignment createAssignment(Command command) {
-        WorkSpace workspace = workSpaceRepositoryPort.findById(command.workspaceId())
+        Workspace workspace = workspaceRepositoryPort.findById(command.workspaceId())
                 .orElseThrow(() -> new ResourceNotFoundException("Workspace with ID " + command.workspaceId() + " not found"));
 
-        WorkSpaceMember creator = workSpaceMemberRepositoryPort.findById(command.createdById())
+        WorkspaceMember creator = workspaceRepositoryPort.findMemberById(command.createdById())
                 .orElseThrow(() -> new ResourceNotFoundException("Workspace member with ID " + command.createdById() + " not found"));
 
         if (!creator.getWorkspace().getId().equals(command.workspaceId())) {

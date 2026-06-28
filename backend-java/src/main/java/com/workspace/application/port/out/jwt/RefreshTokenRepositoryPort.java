@@ -3,7 +3,7 @@ package com.workspace.application.port.out.jwt;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-import com.workspace.domain.model.user.RefreshToken;
+import com.workspace.domain.model.jwt.RefreshToken;
 
 public interface RefreshTokenRepositoryPort {
     Optional<RefreshToken> findById(UUID id);
