@@ -1,7 +1,7 @@
 package com.workspace.infrastructure.adapter.out.persistence.assignment;
 
 import com.workspace.domain.model.assignment.Assignee;
-import com.workspace.infrastructure.adapter.out.persistence.workspace.WorkSpaceMemberMapper;
+import com.workspace.infrastructure.adapter.out.persistence.workspace.WorkspaceMemberMapper;
 
 public class AssigneeMapper {
 
@@ -15,7 +15,7 @@ public class AssigneeMapper {
         return Assignee.builder()
                 .id(entity.getId())
                 .assignment(AssignmentMapper.toDomain(entity.getAssignment()))
-                .workspaceMember(WorkSpaceMemberMapper.toDomain(entity.getWorkspaceMember()))
+                .workspaceMember(WorkspaceMemberMapper.toDomain(entity.getWorkspaceMember()))
                 .assignedAt(entity.getAssignedAt())
                 .build();
     }
@@ -28,7 +28,7 @@ public class AssigneeMapper {
         return AssigneeEntity.builder()
                 .id(domain.getId())
                 .assignment(AssignmentMapper.toEntity(domain.getAssignment()))
-                .workspaceMember(WorkSpaceMemberMapper.toEntity(domain.getWorkspaceMember()))
+                .workspaceMember(WorkspaceMemberMapper.toEntity(domain.getWorkspaceMember()))
                 .assignedAt(domain.getAssignedAt())
                 .build();
     }

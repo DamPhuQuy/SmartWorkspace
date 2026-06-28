@@ -4,12 +4,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.workspace.application.port.in.workspace.RemoveWorkspaceMemberUseCase;
-import com.workspace.application.port.out.workspace.WorkSpaceMemberRepositoryPort;
-import com.workspace.application.port.out.workspace.WorkSpaceRepositoryPort;
+import com.workspace.application.port.out.workspace.WorkspaceRepositoryPort;
 import com.workspace.domain.exception.DomainException;
 import com.workspace.domain.exception.ResourceNotFoundException;
-import com.workspace.domain.model.workspace.WorkSpace;
-import com.workspace.domain.model.workspace.WorkSpaceMember;
+import com.workspace.domain.model.workspace.Workspace;
+import com.workspace.domain.model.workspace.WorkspaceMember;
 
 import lombok.RequiredArgsConstructor;
 
@@ -17,16 +16,15 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class RemoveWorkspaceMemberService implements RemoveWorkspaceMemberUseCase {
 
-    private final WorkSpaceRepositoryPort workSpaceRepositoryPort;
-    private final WorkSpaceMemberRepositoryPort workSpaceMemberRepositoryPort;
-
+    private final WorkspaceRepositoryPort workspaceRepositoryPort;
+    
     @Override
     @Transactional
     public void removeMember(Command command) {
-        WorkSpace workspace = workSpaceRepositoryPort.findById(command.workspaceId())
+        Workspace workspace = workspaceRepositoryPort.findById(command.workspaceId())
                 .orElseThrow(() -> new ResourceNotFoundException("Workspace with ID " + command.workspaceId() + " not found"));
 
-        WorkSpaceMember member = workSpaceMemberRepositoryPort.findByWorkspaceIdAndUserId(command.workspaceId(), command.userId())
+        WorkspaceMember member = workspaceRepositoryPort.findMemberByWorkspaceIdAndUserId(command.workspaceId(), command.userId())
                 .orElseThrow(() -> new ResourceNotFoundException("Workspace member with User ID " + command.userId() + " not found in workspace"));
 
         // Owners cannot be removed from their own workspace
@@ -34,6 +32,6 @@ public class RemoveWorkspaceMemberService implements RemoveWorkspaceMemberUseCas
             throw new DomainException("The workspace owner cannot be removed from the workspace");
         }
 
-        workSpaceMemberRepositoryPort.deleteById(member.getId());
+        workspaceRepositoryPort.deleteMemberById(member.getId());
     }
 }

@@ -1,7 +1,7 @@
 package com.workspace.infrastructure.adapter.out.persistence.meeting;
 
 import com.workspace.domain.model.meeting.MeetingSchedule;
-import com.workspace.infrastructure.adapter.out.persistence.workspace.WorkSpaceMapper;
+import com.workspace.infrastructure.adapter.out.persistence.workspace.WorkspaceMapper;
 
 public class MeetingScheduleMapper {
 
@@ -14,7 +14,7 @@ public class MeetingScheduleMapper {
 
         return MeetingSchedule.builder()
                 .id(entity.getId())
-                .workspace(WorkSpaceMapper.toDomain(entity.getWorkspace()))
+                .workspace(WorkspaceMapper.toDomain(entity.getWorkspace()))
                 .title(entity.getTitle())
                 .startTime(entity.getStartTime())
                 .endTime(entity.getEndTime())
@@ -30,7 +30,7 @@ public class MeetingScheduleMapper {
 
         return MeetingScheduleEntity.builder()
                 .id(domain.getId())
-                .workspace(WorkSpaceMapper.toEntity(domain.getWorkspace()))
+                .workspace(WorkspaceMapper.toEntity(domain.getWorkspace()))
                 .title(domain.getTitle())
                 .startTime(domain.getStartTime())
                 .endTime(domain.getEndTime())

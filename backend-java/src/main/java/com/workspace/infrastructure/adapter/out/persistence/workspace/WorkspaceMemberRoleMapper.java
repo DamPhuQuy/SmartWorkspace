@@ -1,7 +1,7 @@
 package com.workspace.infrastructure.adapter.out.persistence.workspace;
 
 import com.workspace.domain.model.workspace.WorkspaceMemberRole;
-import com.workspace.infrastructure.adapter.out.persistence.user.RoleMapper;
+import com.workspace.infrastructure.adapter.out.persistence.role.RoleMapper;
 
 public class WorkspaceMemberRoleMapper {
 
@@ -14,7 +14,7 @@ public class WorkspaceMemberRoleMapper {
 
         return WorkspaceMemberRole.builder()
                 .id(entity.getId())
-                .workspaceMember(WorkSpaceMemberMapper.toDomain(entity.getWorkspaceMember()))
+                .workspaceMember(WorkspaceMemberMapper.toDomain(entity.getWorkspaceMember()))
                 .role(RoleMapper.toDomain(entity.getRole()))
                 .build();
     }
@@ -26,7 +26,7 @@ public class WorkspaceMemberRoleMapper {
 
         return WorkspaceMemberRoleEntity.builder()
                 .id(domain.getId())
-                .workspaceMember(WorkSpaceMemberMapper.toEntity(domain.getWorkspaceMember()))
+                .workspaceMember(WorkspaceMemberMapper.toEntity(domain.getWorkspaceMember()))
                 .role(RoleMapper.toEntity(domain.getRole()))
                 .build();
     }

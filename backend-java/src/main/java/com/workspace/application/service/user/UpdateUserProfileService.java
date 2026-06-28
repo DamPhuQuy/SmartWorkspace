@@ -5,7 +5,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.workspace.application.port.in.user.UpdateUserProfileUseCase;
 import com.workspace.application.port.out.user.UserRepositoryPort;
-import com.workspace.application.port.out.user.UserProfileRepositoryPort;
 import com.workspace.domain.exception.ResourceNotFoundException;
 import com.workspace.domain.model.user.UserProfile;
 
@@ -16,8 +15,7 @@ import lombok.RequiredArgsConstructor;
 public class UpdateUserProfileService implements UpdateUserProfileUseCase {
 
     private final UserRepositoryPort userRepositoryPort;
-    private final UserProfileRepositoryPort userProfileRepositoryPort;
-
+    
     @Override
     @Transactional
     public UserProfile updateUserProfile(Command command) {
@@ -25,7 +23,7 @@ public class UpdateUserProfileService implements UpdateUserProfileUseCase {
         userRepositoryPort.findById(command.userId())
                 .orElseThrow(() -> new ResourceNotFoundException("User with ID " + command.userId() + " not found"));
 
-        UserProfile existingProfile = userProfileRepositoryPort.findByUserId(command.userId())
+        UserProfile existingProfile = userRepositoryPort.findProfileByUserId(command.userId())
                 .orElse(UserProfile.builder().userId(command.userId()).build());
 
         UserProfile updatedProfile = UserProfile.builder()
@@ -37,6 +35,6 @@ public class UpdateUserProfileService implements UpdateUserProfileUseCase {
                 .discordId(command.discordId() != null ? command.discordId() : existingProfile.getDiscordId())
                 .build();
 
-        return userProfileRepositoryPort.save(updatedProfile);
+        return userRepositoryPort.saveProfile(updatedProfile);
     }
 }

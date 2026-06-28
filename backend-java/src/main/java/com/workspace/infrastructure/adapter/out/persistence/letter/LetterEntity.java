@@ -7,7 +7,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.annotations.UuidGenerator;
 
-import com.workspace.infrastructure.adapter.out.persistence.workspace.WorkSpaceMemberEntity;
+import com.workspace.infrastructure.adapter.out.persistence.workspace.WorkspaceMemberEntity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -46,7 +46,7 @@ public class LetterEntity {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "workspace_member_id", nullable = false)
-    private WorkSpaceMemberEntity workspaceMember;
+    private WorkspaceMemberEntity workspaceMember;
 
     @Column(name = "letter_type", nullable = false, length = 100)
     private String letterType;

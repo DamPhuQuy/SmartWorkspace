@@ -7,12 +7,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.workspace.application.port.in.role.CreateRoleUseCase;
-import com.workspace.application.port.out.user.RoleRepositoryPort;
-import com.workspace.application.port.out.workspace.WorkSpaceRepositoryPort;
+import com.workspace.application.port.out.role.RoleRepositoryPort;
+import com.workspace.application.port.out.workspace.WorkspaceRepositoryPort;
 import com.workspace.domain.exception.DomainException;
 import com.workspace.domain.exception.ResourceNotFoundException;
-import com.workspace.domain.model.user.Role;
-import com.workspace.domain.model.workspace.WorkSpace;
+import com.workspace.domain.model.role.Role;
+import com.workspace.domain.model.workspace.Workspace;
 
 import lombok.RequiredArgsConstructor;
 
@@ -21,12 +21,12 @@ import lombok.RequiredArgsConstructor;
 public class CreateRoleService implements CreateRoleUseCase {
 
     private final RoleRepositoryPort roleRepositoryPort;
-    private final WorkSpaceRepositoryPort workSpaceRepositoryPort;
+    private final WorkspaceRepositoryPort workspaceRepositoryPort;
 
     @Override
     @Transactional
     public Role createRole(Command command) {
-        WorkSpace workspace = workSpaceRepositoryPort.findById(command.workspaceId())
+        Workspace workspace = workspaceRepositoryPort.findById(command.workspaceId())
                 .orElseThrow(() -> new ResourceNotFoundException("Workspace with ID " + command.workspaceId() + " not found"));
 
         if (roleRepositoryPort.existsByWorkspaceIdAndName(command.workspaceId(), command.name())) {

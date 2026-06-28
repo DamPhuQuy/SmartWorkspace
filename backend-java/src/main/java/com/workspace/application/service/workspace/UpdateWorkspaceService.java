@@ -6,10 +6,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.workspace.application.port.in.workspace.UpdateWorkspaceUseCase;
-import com.workspace.application.port.out.workspace.WorkSpaceRepositoryPort;
+import com.workspace.application.port.out.workspace.WorkspaceRepositoryPort;
 import com.workspace.domain.exception.DomainException;
 import com.workspace.domain.exception.ResourceNotFoundException;
-import com.workspace.domain.model.workspace.WorkSpace;
+import com.workspace.domain.model.workspace.Workspace;
 
 import lombok.RequiredArgsConstructor;
 
@@ -17,25 +17,25 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class UpdateWorkspaceService implements UpdateWorkspaceUseCase {
 
-    private final WorkSpaceRepositoryPort workSpaceRepositoryPort;
+    private final WorkspaceRepositoryPort workspaceRepositoryPort;
 
     @Override
     @Transactional
-    public WorkSpace updateWorkspace(Command command) {
-        WorkSpace existingWorkspace = workSpaceRepositoryPort.findById(command.id())
+    public Workspace updateWorkspace(Command command) {
+        Workspace existingWorkspace = workspaceRepositoryPort.findById(command.id())
                 .orElseThrow(() -> new ResourceNotFoundException("Workspace with ID " + command.id() + " not found"));
 
         if (command.name() != null && !command.name().equals(existingWorkspace.getName()) &&
-                workSpaceRepositoryPort.existsByName(command.name())) {
+                workspaceRepositoryPort.existsByName(command.name())) {
             throw new DomainException("Workspace with name " + command.name() + " already exists");
         }
 
         if (command.slug() != null && !command.slug().equals(existingWorkspace.getSlug()) &&
-                workSpaceRepositoryPort.existsBySlug(command.slug())) {
+                workspaceRepositoryPort.existsBySlug(command.slug())) {
             throw new DomainException("Workspace with slug " + command.slug() + " already exists");
         }
 
-        WorkSpace updatedWorkspace = WorkSpace.builder()
+        Workspace updatedWorkspace = Workspace.builder()
                 .id(existingWorkspace.getId())
                 .name(command.name() != null ? command.name() : existingWorkspace.getName())
                 .slug(command.slug() != null ? command.slug() : existingWorkspace.getSlug())
@@ -45,6 +45,6 @@ public class UpdateWorkspaceService implements UpdateWorkspaceUseCase {
                 .updatedAt(Instant.now())
                 .build();
 
-        return workSpaceRepositoryPort.save(updatedWorkspace);
+        return workspaceRepositoryPort.save(updatedWorkspace);
     }
 }

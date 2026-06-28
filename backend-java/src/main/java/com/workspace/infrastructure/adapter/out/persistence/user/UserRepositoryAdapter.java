@@ -2,12 +2,10 @@ package com.workspace.infrastructure.adapter.out.persistence.user;
 
 import java.util.Optional;
 import java.util.UUID;
-
 import org.springframework.stereotype.Repository;
-
 import com.workspace.application.port.out.user.UserRepositoryPort;
 import com.workspace.domain.model.user.User;
-
+import com.workspace.domain.model.user.UserProfile;
 import lombok.RequiredArgsConstructor;
 
 @Repository
@@ -15,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 public class UserRepositoryAdapter implements UserRepositoryPort {
 
     private final UserJpaRepository userJpaRepository;
+    private final UserProfileJpaRepository userProfileJpaRepository;
 
     @Override
     public Optional<User> findById(UUID id) {
@@ -54,5 +53,24 @@ public class UserRepositoryAdapter implements UserRepositoryPort {
     @Override
     public void deleteById(UUID id) {
         userJpaRepository.deleteById(id);
+    }
+
+    // UserProfile methods
+    @Override
+    public Optional<UserProfile> findProfileByUserId(UUID userId) {
+        return userProfileJpaRepository.findById(userId)
+                .map(UserProfileMapper::toDomain);
+    }
+
+    @Override
+    public UserProfile saveProfile(UserProfile userProfile) {
+        UserProfileEntity entity = UserProfileMapper.toEntity(userProfile);
+        UserProfileEntity savedEntity = userProfileJpaRepository.save(entity);
+        return UserProfileMapper.toDomain(savedEntity);
+    }
+
+    @Override
+    public void deleteProfileByUserId(UUID userId) {
+        userProfileJpaRepository.deleteById(userId);
     }
 }

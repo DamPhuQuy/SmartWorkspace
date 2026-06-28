@@ -1,7 +1,7 @@
 package com.workspace.infrastructure.adapter.out.persistence.letter;
 
 import com.workspace.domain.model.letter.Letter;
-import com.workspace.infrastructure.adapter.out.persistence.workspace.WorkSpaceMemberMapper;
+import com.workspace.infrastructure.adapter.out.persistence.workspace.WorkspaceMemberMapper;
 
 public class LetterMapper {
 
@@ -14,7 +14,7 @@ public class LetterMapper {
 
         return Letter.builder()
                 .id(entity.getId())
-                .workspaceMember(WorkSpaceMemberMapper.toDomain(entity.getWorkspaceMember()))
+                .workspaceMember(WorkspaceMemberMapper.toDomain(entity.getWorkspaceMember()))
                 .letterType(entity.getLetterType())
                 .description(entity.getDescription())
                 .status(entity.getStatus())
@@ -30,7 +30,7 @@ public class LetterMapper {
 
         return LetterEntity.builder()
                 .id(domain.getId())
-                .workspaceMember(WorkSpaceMemberMapper.toEntity(domain.getWorkspaceMember()))
+                .workspaceMember(WorkspaceMemberMapper.toEntity(domain.getWorkspaceMember()))
                 .letterType(domain.getLetterType())
                 .description(domain.getDescription())
                 .status(domain.getStatus())

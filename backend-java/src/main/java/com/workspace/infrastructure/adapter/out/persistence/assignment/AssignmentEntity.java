@@ -7,8 +7,8 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.annotations.UuidGenerator;
 
-import com.workspace.infrastructure.adapter.out.persistence.workspace.WorkSpaceEntity;
-import com.workspace.infrastructure.adapter.out.persistence.workspace.WorkSpaceMemberEntity;
+import com.workspace.infrastructure.adapter.out.persistence.workspace.WorkspaceEntity;
+import com.workspace.infrastructure.adapter.out.persistence.workspace.WorkspaceMemberEntity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -47,7 +47,7 @@ public class AssignmentEntity {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "workspace_id", nullable = false)
-    private WorkSpaceEntity workspace;
+    private WorkspaceEntity workspace;
 
     @Column(name = "title", nullable = false)
     private String title;
@@ -60,7 +60,7 @@ public class AssignmentEntity {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "created_by", nullable = false)
-    private WorkSpaceMemberEntity createdBy;
+    private WorkspaceMemberEntity createdBy;
 
     @Column(name = "created_at", nullable = false, updatable = false)
     @CreationTimestamp

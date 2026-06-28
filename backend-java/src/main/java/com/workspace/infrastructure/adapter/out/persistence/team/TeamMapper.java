@@ -1,7 +1,7 @@
 package com.workspace.infrastructure.adapter.out.persistence.team;
 
 import com.workspace.domain.model.team.Team;
-import com.workspace.infrastructure.adapter.out.persistence.workspace.WorkSpaceMapper;
+import com.workspace.infrastructure.adapter.out.persistence.workspace.WorkspaceMapper;
 
 public class TeamMapper {
 
@@ -14,7 +14,7 @@ public class TeamMapper {
 
         return Team.builder()
                 .id(entity.getId())
-                .workspace(WorkSpaceMapper.toDomain(entity.getWorkspace()))
+                .workspace(WorkspaceMapper.toDomain(entity.getWorkspace()))
                 .name(entity.getName())
                 .createdAt(entity.getCreatedAt())
                 .updatedAt(entity.getUpdatedAt())
@@ -28,7 +28,7 @@ public class TeamMapper {
 
         return TeamEntity.builder()
                 .id(domain.getId())
-                .workspace(WorkSpaceMapper.toEntity(domain.getWorkspace()))
+                .workspace(WorkspaceMapper.toEntity(domain.getWorkspace()))
                 .name(domain.getName())
                 .createdAt(domain.getCreatedAt())
                 .updatedAt(domain.getUpdatedAt())

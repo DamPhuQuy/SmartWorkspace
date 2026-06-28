@@ -7,16 +7,15 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.workspace.application.port.in.letter.SubmitLateLetterUseCase;
-import com.workspace.application.port.out.letter.LateLetterRepositoryPort;
 import com.workspace.application.port.out.letter.LetterRepositoryPort;
 import com.workspace.application.port.out.meeting.MeetingScheduleRepositoryPort;
-import com.workspace.application.port.out.workspace.WorkSpaceMemberRepositoryPort;
+import com.workspace.application.port.out.workspace.WorkspaceRepositoryPort;
 import com.workspace.domain.exception.DomainException;
 import com.workspace.domain.exception.ResourceNotFoundException;
 import com.workspace.domain.model.letter.LateLetter;
 import com.workspace.domain.model.letter.Letter;
 import com.workspace.domain.model.meeting.MeetingSchedule;
-import com.workspace.domain.model.workspace.WorkSpaceMember;
+import com.workspace.domain.model.workspace.WorkspaceMember;
 
 import lombok.RequiredArgsConstructor;
 
@@ -25,14 +24,13 @@ import lombok.RequiredArgsConstructor;
 public class SubmitLateLetterService implements SubmitLateLetterUseCase {
 
     private final LetterRepositoryPort letterRepositoryPort;
-    private final LateLetterRepositoryPort lateLetterRepositoryPort;
-    private final WorkSpaceMemberRepositoryPort workSpaceMemberRepositoryPort;
-    private final MeetingScheduleRepositoryPort meetingScheduleRepositoryPort;
+    private final WorkspaceRepositoryPort workspaceRepositoryPort;
+            private final MeetingScheduleRepositoryPort meetingScheduleRepositoryPort;
 
     @Override
     @Transactional
     public LateLetter submitLateLetter(Command command) {
-        WorkSpaceMember member = workSpaceMemberRepositoryPort.findById(command.workspaceMemberId())
+        WorkspaceMember member = workspaceRepositoryPort.findMemberById(command.workspaceMemberId())
                 .orElseThrow(() -> new ResourceNotFoundException("Workspace member with ID " + command.workspaceMemberId() + " not found"));
 
         MeetingSchedule meeting = meetingScheduleRepositoryPort.findById(command.meetingScheduleId())
@@ -64,6 +62,6 @@ public class SubmitLateLetterService implements SubmitLateLetterUseCase {
                 .expectedArrivalTime(command.expectedArrivalTime())
                 .build();
 
-        return lateLetterRepositoryPort.save(lateLetter);
+        return letterRepositoryPort.saveLate(lateLetter);
     }
 }

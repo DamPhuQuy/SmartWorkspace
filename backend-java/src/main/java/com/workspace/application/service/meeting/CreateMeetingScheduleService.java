@@ -8,11 +8,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.workspace.application.port.in.meeting.CreateMeetingScheduleUseCase;
 import com.workspace.application.port.out.meeting.MeetingScheduleRepositoryPort;
-import com.workspace.application.port.out.workspace.WorkSpaceRepositoryPort;
+import com.workspace.application.port.out.workspace.WorkspaceRepositoryPort;
 import com.workspace.domain.exception.DomainException;
 import com.workspace.domain.exception.ResourceNotFoundException;
 import com.workspace.domain.model.meeting.MeetingSchedule;
-import com.workspace.domain.model.workspace.WorkSpace;
+import com.workspace.domain.model.workspace.Workspace;
 
 import lombok.RequiredArgsConstructor;
 
@@ -21,12 +21,12 @@ import lombok.RequiredArgsConstructor;
 public class CreateMeetingScheduleService implements CreateMeetingScheduleUseCase {
 
     private final MeetingScheduleRepositoryPort meetingScheduleRepositoryPort;
-    private final WorkSpaceRepositoryPort workSpaceRepositoryPort;
+    private final WorkspaceRepositoryPort workspaceRepositoryPort;
 
     @Override
     @Transactional
     public MeetingSchedule createMeeting(Command command) {
-        WorkSpace workspace = workSpaceRepositoryPort.findById(command.workspaceId())
+        Workspace workspace = workspaceRepositoryPort.findById(command.workspaceId())
                 .orElseThrow(() -> new ResourceNotFoundException("Workspace with ID " + command.workspaceId() + " not found"));
 
         if (command.endTime().isBefore(command.startTime())) {

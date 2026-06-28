@@ -6,13 +6,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.workspace.application.port.in.role.AssignWorkspaceMemberRoleUseCase;
-import com.workspace.application.port.out.user.RoleRepositoryPort;
-import com.workspace.application.port.out.workspace.WorkSpaceMemberRepositoryPort;
-import com.workspace.application.port.out.workspace.WorkspaceMemberRoleRepositoryPort;
+import com.workspace.application.port.out.role.RoleRepositoryPort;
+import com.workspace.application.port.out.workspace.WorkspaceRepositoryPort;
 import com.workspace.domain.exception.DomainException;
 import com.workspace.domain.exception.ResourceNotFoundException;
-import com.workspace.domain.model.user.Role;
-import com.workspace.domain.model.workspace.WorkSpaceMember;
+import com.workspace.domain.model.role.Role;
+import com.workspace.domain.model.workspace.WorkspaceMember;
 import com.workspace.domain.model.workspace.WorkspaceMemberRole;
 
 import lombok.RequiredArgsConstructor;
@@ -21,14 +20,13 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class AssignWorkspaceMemberRoleService implements AssignWorkspaceMemberRoleUseCase {
 
-    private final WorkSpaceMemberRepositoryPort workSpaceMemberRepositoryPort;
     private final RoleRepositoryPort roleRepositoryPort;
-    private final WorkspaceMemberRoleRepositoryPort workspaceMemberRoleRepositoryPort;
-
+    private final WorkspaceRepositoryPort workspaceRepositoryPort;
+    
     @Override
     @Transactional
     public WorkspaceMemberRole assignRole(Command command) {
-        WorkSpaceMember member = workSpaceMemberRepositoryPort.findById(command.workspaceMemberId())
+        WorkspaceMember member = workspaceRepositoryPort.findMemberById(command.workspaceMemberId())
                 .orElseThrow(() -> new ResourceNotFoundException("Workspace member with ID " + command.workspaceMemberId() + " not found"));
 
         Role role = roleRepositoryPort.findById(command.roleId())
@@ -39,7 +37,7 @@ public class AssignWorkspaceMemberRoleService implements AssignWorkspaceMemberRo
             throw new DomainException("Role must belong to the same workspace as the member");
         }
 
-        if (workspaceMemberRoleRepositoryPort.existsByWorkspaceMemberIdAndRoleId(command.workspaceMemberId(), command.roleId())) {
+        if (workspaceRepositoryPort.existsMemberRoleByWorkspaceMemberIdAndRoleId(command.workspaceMemberId(), command.roleId())) {
             throw new DomainException("Member already has this role assigned");
         }
 
@@ -49,6 +47,6 @@ public class AssignWorkspaceMemberRoleService implements AssignWorkspaceMemberRo
                 .role(role)
                 .build();
 
-        return workspaceMemberRoleRepositoryPort.save(memberRole);
+        return workspaceRepositoryPort.saveMemberRole(memberRole);
     }
 }

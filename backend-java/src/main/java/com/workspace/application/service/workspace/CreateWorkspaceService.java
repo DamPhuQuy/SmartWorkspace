@@ -8,13 +8,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.workspace.application.port.in.workspace.CreateWorkspaceUseCase;
 import com.workspace.application.port.out.user.UserRepositoryPort;
-import com.workspace.application.port.out.workspace.WorkSpaceMemberRepositoryPort;
-import com.workspace.application.port.out.workspace.WorkSpaceRepositoryPort;
+import com.workspace.application.port.out.workspace.WorkspaceRepositoryPort;
 import com.workspace.domain.exception.DomainException;
 import com.workspace.domain.exception.ResourceNotFoundException;
 import com.workspace.domain.model.user.User;
-import com.workspace.domain.model.workspace.WorkSpace;
-import com.workspace.domain.model.workspace.WorkSpaceMember;
+import com.workspace.domain.model.workspace.Workspace;
+import com.workspace.domain.model.workspace.WorkspaceMember;
 
 import lombok.RequiredArgsConstructor;
 
@@ -22,26 +21,25 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class CreateWorkspaceService implements CreateWorkspaceUseCase {
 
-    private final WorkSpaceRepositoryPort workSpaceRepositoryPort;
+    private final WorkspaceRepositoryPort workspaceRepositoryPort;
     private final UserRepositoryPort userRepositoryPort;
-    private final WorkSpaceMemberRepositoryPort workSpaceMemberRepositoryPort;
-
+    
     @Override
     @Transactional
-    public WorkSpace createWorkspace(Command command) {
+    public Workspace createWorkspace(Command command) {
         User owner = userRepositoryPort.findById(command.ownerId())
                 .orElseThrow(() -> new ResourceNotFoundException("Owner with ID " + command.ownerId() + " not found"));
 
-        if (workSpaceRepositoryPort.existsByName(command.name())) {
+        if (workspaceRepositoryPort.existsByName(command.name())) {
             throw new DomainException("Workspace with name " + command.name() + " already exists");
         }
-        if (workSpaceRepositoryPort.existsBySlug(command.slug())) {
+        if (workspaceRepositoryPort.existsBySlug(command.slug())) {
             throw new DomainException("Workspace with slug " + command.slug() + " already exists");
         }
 
         UUID workspaceId = UUID.randomUUID();
 
-        WorkSpace workSpace = WorkSpace.builder()
+        Workspace workspace = Workspace.builder()
                 .id(workspaceId)
                 .name(command.name())
                 .slug(command.slug())
@@ -51,17 +49,17 @@ public class CreateWorkspaceService implements CreateWorkspaceUseCase {
                 .updatedAt(Instant.now())
                 .build();
 
-        WorkSpace savedWorkspace = workSpaceRepositoryPort.save(workSpace);
+        Workspace savedWorkspace = workspaceRepositoryPort.save(workspace);
 
         // Owner becomes the first member of the workspace
-        WorkSpaceMember ownerMember = WorkSpaceMember.builder()
+        WorkspaceMember ownerMember = WorkspaceMember.builder()
                 .id(UUID.randomUUID())
                 .workspace(savedWorkspace)
                 .user(owner)
                 .joinedAt(Instant.now())
                 .build();
 
-        workSpaceMemberRepositoryPort.save(ownerMember);
+        workspaceRepositoryPort.saveMember(ownerMember);
 
         return savedWorkspace;
     }

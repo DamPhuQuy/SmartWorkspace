@@ -4,7 +4,7 @@ import java.util.UUID;
 
 import org.hibernate.annotations.UuidGenerator;
 
-import com.workspace.infrastructure.adapter.out.persistence.user.RoleEntity;
+import com.workspace.infrastructure.adapter.out.persistence.role.RoleEntity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -42,7 +42,7 @@ public class WorkspaceMemberRoleEntity {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "workspace_member_id", nullable = false)
-    private WorkSpaceMemberEntity workspaceMember;
+    private WorkspaceMemberEntity workspaceMember;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "role_id", nullable = false)

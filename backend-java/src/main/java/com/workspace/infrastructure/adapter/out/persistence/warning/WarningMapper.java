@@ -1,7 +1,7 @@
 package com.workspace.infrastructure.adapter.out.persistence.warning;
 
 import com.workspace.domain.model.warning.Warning;
-import com.workspace.infrastructure.adapter.out.persistence.workspace.WorkSpaceMemberMapper;
+import com.workspace.infrastructure.adapter.out.persistence.workspace.WorkspaceMemberMapper;
 
 public class WarningMapper {
 
@@ -14,7 +14,7 @@ public class WarningMapper {
 
         return Warning.builder()
                 .id(entity.getId())
-                .workspaceMember(WorkSpaceMemberMapper.toDomain(entity.getWorkspaceMember()))
+                .workspaceMember(WorkspaceMemberMapper.toDomain(entity.getWorkspaceMember()))
                 .warningType(entity.getWarningType())
                 .description(entity.getDescription())
                 .createdAt(entity.getCreatedAt())
@@ -29,7 +29,7 @@ public class WarningMapper {
 
         return WarningEntity.builder()
                 .id(domain.getId())
-                .workspaceMember(WorkSpaceMemberMapper.toEntity(domain.getWorkspaceMember()))
+                .workspaceMember(WorkspaceMemberMapper.toEntity(domain.getWorkspaceMember()))
                 .warningType(domain.getWarningType())
                 .description(domain.getDescription())
                 .createdAt(domain.getCreatedAt())

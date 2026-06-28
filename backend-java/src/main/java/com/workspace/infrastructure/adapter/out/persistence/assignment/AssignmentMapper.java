@@ -1,8 +1,8 @@
 package com.workspace.infrastructure.adapter.out.persistence.assignment;
 
 import com.workspace.domain.model.assignment.Assignment;
-import com.workspace.infrastructure.adapter.out.persistence.workspace.WorkSpaceMapper;
-import com.workspace.infrastructure.adapter.out.persistence.workspace.WorkSpaceMemberMapper;
+import com.workspace.infrastructure.adapter.out.persistence.workspace.WorkspaceMapper;
+import com.workspace.infrastructure.adapter.out.persistence.workspace.WorkspaceMemberMapper;
 
 public class AssignmentMapper {
 
@@ -15,11 +15,11 @@ public class AssignmentMapper {
 
         return Assignment.builder()
                 .id(entity.getId())
-                .workspace(WorkSpaceMapper.toDomain(entity.getWorkspace()))
+                .workspace(WorkspaceMapper.toDomain(entity.getWorkspace()))
                 .title(entity.getTitle())
                 .description(entity.getDescription())
                 .deadline(entity.getDeadline())
-                .createdBy(WorkSpaceMemberMapper.toDomain(entity.getCreatedBy()))
+                .createdBy(WorkspaceMemberMapper.toDomain(entity.getCreatedBy()))
                 .createdAt(entity.getCreatedAt())
                 .updatedAt(entity.getUpdatedAt())
                 .build();
@@ -32,11 +32,11 @@ public class AssignmentMapper {
 
         return AssignmentEntity.builder()
                 .id(domain.getId())
-                .workspace(WorkSpaceMapper.toEntity(domain.getWorkspace()))
+                .workspace(WorkspaceMapper.toEntity(domain.getWorkspace()))
                 .title(domain.getTitle())
                 .description(domain.getDescription())
                 .deadline(domain.getDeadline())
-                .createdBy(WorkSpaceMemberMapper.toEntity(domain.getCreatedBy()))
+                .createdBy(WorkspaceMemberMapper.toEntity(domain.getCreatedBy()))
                 .createdAt(domain.getCreatedAt())
                 .updatedAt(domain.getUpdatedAt())
                 .build();
