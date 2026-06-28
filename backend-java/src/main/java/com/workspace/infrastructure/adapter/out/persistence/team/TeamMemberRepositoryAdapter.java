@@ -1,4 +1,4 @@
-package com.workspace.adapter.out.persistence.team;
+package com.workspace.infrastructure.adapter.out.persistence.team;
 
 import java.util.List;
 import java.util.Optional;
