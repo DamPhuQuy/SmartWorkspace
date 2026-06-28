@@ -1,6 +1,6 @@
-package com.workspace.infrastructure.adapter.out.persistence.user;
+package com.workspace.infrastructure.adapter.out.persistence.role;
 
-import com.workspace.domain.model.user.Permission;
+import com.workspace.domain.model.role.Permission;
 
 public class PermissionMapper {
 

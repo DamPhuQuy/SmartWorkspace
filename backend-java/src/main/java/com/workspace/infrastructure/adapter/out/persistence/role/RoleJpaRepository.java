@@ -1,4 +1,4 @@
-package com.workspace.infrastructure.adapter.out.persistence.user;
+package com.workspace.infrastructure.adapter.out.persistence.role;
 
 import java.util.List;
 import java.util.Optional;
