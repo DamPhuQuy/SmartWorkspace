@@ -1,4 +1,4 @@
-package com.workspace.adapter.out.persistence.user;
+package com.workspace.infrastructure.adapter.out.persistence.user;
 
 import com.workspace.domain.model.user.UserProfile;
 

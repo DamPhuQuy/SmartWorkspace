@@ -1,7 +1,7 @@
-package com.workspace.adapter.out.persistence.user;
+package com.workspace.infrastructure.adapter.out.persistence.user;
 
 import com.workspace.domain.model.user.Role;
-import com.workspace.adapter.out.persistence.workspace.WorkSpaceMapper;
+import com.workspace.infrastructure.adapter.out.persistence.workspace.WorkSpaceMapper;
 
 public class RoleMapper {
 

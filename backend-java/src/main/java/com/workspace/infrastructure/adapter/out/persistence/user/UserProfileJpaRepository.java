@@ -1,4 +1,4 @@
-package com.workspace.adapter.out.persistence.user;
+package com.workspace.infrastructure.adapter.out.persistence.user;
 
 import java.util.UUID;
 import org.springframework.data.jpa.repository.JpaRepository;
