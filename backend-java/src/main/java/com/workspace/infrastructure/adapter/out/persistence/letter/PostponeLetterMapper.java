@@ -1,7 +1,7 @@
-package com.workspace.adapter.out.persistence.letter;
+package com.workspace.infrastructure.adapter.out.persistence.letter;
 
 import com.workspace.domain.model.letter.PostponeLetter;
-import com.workspace.adapter.out.persistence.assignment.AssignmentMapper;
+import com.workspace.infrastructure.adapter.out.persistence.assignment.AssignmentMapper;
 
 public class PostponeLetterMapper {
 

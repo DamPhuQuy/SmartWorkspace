@@ -1,4 +1,4 @@
-package com.workspace.adapter.out.persistence.letter;
+package com.workspace.infrastructure.adapter.out.persistence.letter;
 
 import java.util.Optional;
 import java.util.UUID;

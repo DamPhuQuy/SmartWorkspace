@@ -1,7 +1,7 @@
-package com.workspace.adapter.out.persistence.letter;
+package com.workspace.infrastructure.adapter.out.persistence.letter;
 
 import com.workspace.domain.model.letter.LateLetter;
-import com.workspace.adapter.out.persistence.meeting.MeetingScheduleMapper;
+import com.workspace.infrastructure.adapter.out.persistence.meeting.MeetingScheduleMapper;
 
 public class LateLetterMapper {
 

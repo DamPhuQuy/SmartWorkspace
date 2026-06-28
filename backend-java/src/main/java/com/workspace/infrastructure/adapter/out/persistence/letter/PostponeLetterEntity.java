@@ -1,11 +1,11 @@
-package com.workspace.adapter.out.persistence.letter;
+package com.workspace.infrastructure.adapter.out.persistence.letter;
 
 import java.time.Instant;
 import java.util.UUID;
 
 import org.hibernate.annotations.UuidGenerator;
 
-import com.workspace.adapter.out.persistence.assignment.AssignmentEntity;
+import com.workspace.infrastructure.adapter.out.persistence.assignment.AssignmentEntity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

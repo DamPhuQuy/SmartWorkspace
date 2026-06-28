@@ -1,7 +1,7 @@
-package com.workspace.adapter.out.persistence.letter;
+package com.workspace.infrastructure.adapter.out.persistence.letter;
 
 import com.workspace.domain.model.letter.Letter;
-import com.workspace.adapter.out.persistence.workspace.WorkSpaceMemberMapper;
+import com.workspace.infrastructure.adapter.out.persistence.workspace.WorkSpaceMemberMapper;
 
 public class LetterMapper {
 
