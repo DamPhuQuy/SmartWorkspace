@@ -1,4 +1,4 @@
-package com.workspace.infrastructure.database.adapter.out.user;
+package com.workspace.adapter.out.persistence.user;
 
 import java.util.List;
 import java.util.Optional;
@@ -8,9 +8,6 @@ import org.springframework.stereotype.Repository;
 
 import com.workspace.application.port.out.jwt.RefreshTokenRepositoryPort;
 import com.workspace.domain.model.user.RefreshToken;
-import com.workspace.infrastructure.database.entity.jwt.RefreshTokenEntity;
-import com.workspace.infrastructure.database.mapper.user.RefreshTokenMapper;
-import com.workspace.infrastructure.database.repository.user.RefreshTokenJpaRepository;
 import lombok.RequiredArgsConstructor;
 
 @Repository

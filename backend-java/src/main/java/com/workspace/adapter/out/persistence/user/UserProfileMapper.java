@@ -1,7 +1,6 @@
-package com.workspace.infrastructure.database.mapper.user;
+package com.workspace.adapter.out.persistence.user;
 
 import com.workspace.domain.model.user.UserProfile;
-import com.workspace.infrastructure.database.entity.user.UserProfileEntity;
 
 public class UserProfileMapper {
 

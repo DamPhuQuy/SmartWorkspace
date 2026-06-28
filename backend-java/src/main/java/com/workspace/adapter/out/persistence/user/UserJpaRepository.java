@@ -1,4 +1,4 @@
-package com.workspace.infrastructure.database.repository.user;
+package com.workspace.adapter.out.persistence.user;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -7,8 +7,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import com.workspace.infrastructure.database.entity.user.UserEntity;
-import com.workspace.infrastructure.database.entity.user.UserProfileEntity;
 
 public interface UserJpaRepository extends JpaRepository<UserEntity, UUID> {
     @Query("""

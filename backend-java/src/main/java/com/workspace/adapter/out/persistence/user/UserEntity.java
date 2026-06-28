@@ -1,4 +1,4 @@
-package com.workspace.infrastructure.database.entity.user;
+package com.workspace.adapter.out.persistence.user;
 
 import java.time.Instant;
 import java.util.UUID;

@@ -1,10 +1,9 @@
-package com.workspace.infrastructure.database.repository.user;
+package com.workspace.adapter.out.persistence.user;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import org.springframework.data.jpa.repository.JpaRepository;
-import com.workspace.infrastructure.database.entity.user.RoleEntity;
 
 public interface RoleJpaRepository extends JpaRepository<RoleEntity, UUID> {
     Optional<RoleEntity> findByWorkspaceIdAndName(UUID workspaceId, String name);

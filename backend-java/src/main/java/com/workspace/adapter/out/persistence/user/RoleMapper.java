@@ -1,8 +1,7 @@
-package com.workspace.infrastructure.database.mapper.user;
+package com.workspace.adapter.out.persistence.user;
 
 import com.workspace.domain.model.user.Role;
-import com.workspace.infrastructure.database.entity.user.RoleEntity;
-import com.workspace.infrastructure.database.mapper.workspace.WorkSpaceMapper;
+import com.workspace.adapter.out.persistence.workspace.WorkSpaceMapper;
 
 public class RoleMapper {
 

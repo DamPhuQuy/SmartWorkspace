@@ -1,4 +1,4 @@
-package com.workspace.infrastructure.database.adapter.out.user;
+package com.workspace.adapter.out.persistence.user;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -7,9 +7,6 @@ import org.springframework.stereotype.Repository;
 
 import com.workspace.application.port.out.user.UserRepositoryPort;
 import com.workspace.domain.model.user.User;
-import com.workspace.infrastructure.database.entity.user.UserEntity;
-import com.workspace.infrastructure.database.mapper.user.UserMapper;
-import com.workspace.infrastructure.database.repository.user.UserJpaRepository;
 
 import lombok.RequiredArgsConstructor;
 
