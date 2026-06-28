@@ -1,0 +1,57 @@
+package com.workspace.infrastructure.database.adapter.out.team;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
+import java.util.stream.Collectors;
+import org.springframework.stereotype.Repository;
+import com.workspace.application.port.out.TeamRepositoryPort;
+import com.workspace.domain.model.team.Team;
+import com.workspace.infrastructure.database.entity.team.TeamEntity;
+import com.workspace.infrastructure.database.mapper.team.TeamMapper;
+import com.workspace.infrastructure.database.repository.team.TeamJpaRepository;
+import lombok.RequiredArgsConstructor;
+
+@Repository
+@RequiredArgsConstructor
+public class TeamRepositoryAdapter implements TeamRepositoryPort {
+
+    private final TeamJpaRepository teamJpaRepository;
+
+    @Override
+    public Optional<Team> findById(UUID id) {
+        return teamJpaRepository.findById(id)
+                .map(TeamMapper::toDomain);
+    }
+
+    @Override
+    public Optional<Team> findByWorkspaceIdAndName(UUID workspaceId, String name) {
+        return teamJpaRepository.findByWorkspaceIdAndName(workspaceId, name)
+                .map(TeamMapper::toDomain);
+    }
+
+    @Override
+    public List<Team> findByWorkspaceId(UUID workspaceId) {
+        return teamJpaRepository.findByWorkspaceId(workspaceId)
+                .stream()
+                .map(TeamMapper::toDomain)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public Team save(Team team) {
+        TeamEntity entity = TeamMapper.toEntity(team);
+        TeamEntity savedEntity = teamJpaRepository.save(entity);
+        return TeamMapper.toDomain(savedEntity);
+    }
+
+    @Override
+    public boolean existsByWorkspaceIdAndName(UUID workspaceId, String name) {
+        return teamJpaRepository.existsByWorkspaceIdAndName(workspaceId, name);
+    }
+
+    @Override
+    public void deleteById(UUID id) {
+        teamJpaRepository.deleteById(id);
+    }
+}
