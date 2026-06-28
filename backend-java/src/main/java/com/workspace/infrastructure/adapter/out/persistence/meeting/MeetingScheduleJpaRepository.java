@@ -1,4 +1,4 @@
-package com.workspace.adapter.out.persistence.meeting;
+package com.workspace.infrastructure.adapter.out.persistence.meeting;
 
 import java.util.List;
 import java.util.Optional;

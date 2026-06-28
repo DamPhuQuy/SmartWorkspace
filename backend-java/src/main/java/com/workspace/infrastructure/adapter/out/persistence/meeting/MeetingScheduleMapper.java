@@ -1,7 +1,7 @@
-package com.workspace.adapter.out.persistence.meeting;
+package com.workspace.infrastructure.adapter.out.persistence.meeting;
 
 import com.workspace.domain.model.meeting.MeetingSchedule;
-import com.workspace.adapter.out.persistence.workspace.WorkSpaceMapper;
+import com.workspace.infrastructure.adapter.out.persistence.workspace.WorkSpaceMapper;
 
 public class MeetingScheduleMapper {
 
