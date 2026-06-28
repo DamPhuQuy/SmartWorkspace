@@ -1,4 +1,4 @@
-package com.workspace.infrastructure.database.adapter.out.warning;
+package com.workspace.adapter.out.persistence.warning;
 
 import java.util.List;
 import java.util.Optional;
@@ -8,9 +8,6 @@ import org.springframework.stereotype.Repository;
 
 import com.workspace.application.port.out.warning.WarningRepositoryPort;
 import com.workspace.domain.model.warning.Warning;
-import com.workspace.infrastructure.database.entity.warning.WarningEntity;
-import com.workspace.infrastructure.database.mapper.warning.WarningMapper;
-import com.workspace.infrastructure.database.repository.warning.WarningJpaRepository;
 import lombok.RequiredArgsConstructor;
 
 @Repository
