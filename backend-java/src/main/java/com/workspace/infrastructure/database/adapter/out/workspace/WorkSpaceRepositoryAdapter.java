@@ -3,7 +3,8 @@ package com.workspace.infrastructure.database.adapter.out.workspace;
 import java.util.Optional;
 import java.util.UUID;
 import org.springframework.stereotype.Repository;
-import com.workspace.application.port.out.WorkSpaceRepositoryPort;
+
+import com.workspace.application.port.out.workspace.WorkSpaceRepositoryPort;
 import com.workspace.domain.model.workspace.WorkSpace;
 import com.workspace.infrastructure.database.entity.workspace.WorkSpaceEntity;
 import com.workspace.infrastructure.database.mapper.workspace.WorkSpaceMapper;

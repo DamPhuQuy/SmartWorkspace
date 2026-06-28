@@ -3,7 +3,8 @@ package com.workspace.infrastructure.database.adapter.out.user;
 import java.util.Optional;
 import java.util.UUID;
 import org.springframework.stereotype.Repository;
-import com.workspace.application.port.out.UserProfileRepositoryPort;
+
+import com.workspace.application.port.out.user.UserProfileRepositoryPort;
 import com.workspace.domain.model.user.UserProfile;
 import com.workspace.infrastructure.database.entity.user.UserProfileEntity;
 import com.workspace.infrastructure.database.mapper.user.UserProfileMapper;

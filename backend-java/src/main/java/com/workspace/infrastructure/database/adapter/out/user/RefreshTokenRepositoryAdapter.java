@@ -5,9 +5,10 @@ import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 import org.springframework.stereotype.Repository;
-import com.workspace.application.port.out.RefreshTokenRepositoryPort;
+
+import com.workspace.application.port.out.jwt.RefreshTokenRepositoryPort;
 import com.workspace.domain.model.user.RefreshToken;
-import com.workspace.infrastructure.database.entity.user.RefreshTokenEntity;
+import com.workspace.infrastructure.database.entity.jwt.RefreshTokenEntity;
 import com.workspace.infrastructure.database.mapper.user.RefreshTokenMapper;
 import com.workspace.infrastructure.database.repository.user.RefreshTokenJpaRepository;
 import lombok.RequiredArgsConstructor;

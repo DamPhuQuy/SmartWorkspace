@@ -3,7 +3,8 @@ package com.workspace.infrastructure.database.adapter.out.letter;
 import java.util.Optional;
 import java.util.UUID;
 import org.springframework.stereotype.Repository;
-import com.workspace.application.port.out.LateLetterRepositoryPort;
+
+import com.workspace.application.port.out.letter.LateLetterRepositoryPort;
 import com.workspace.domain.model.letter.LateLetter;
 import com.workspace.infrastructure.database.entity.letter.LateLetterEntity;
 import com.workspace.infrastructure.database.mapper.letter.LateLetterMapper;

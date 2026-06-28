@@ -5,7 +5,8 @@ import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 import org.springframework.stereotype.Repository;
-import com.workspace.application.port.out.RoleRepositoryPort;
+
+import com.workspace.application.port.out.user.RoleRepositoryPort;
 import com.workspace.domain.model.user.Role;
 import com.workspace.infrastructure.database.entity.user.RoleEntity;
 import com.workspace.infrastructure.database.mapper.user.RoleMapper;

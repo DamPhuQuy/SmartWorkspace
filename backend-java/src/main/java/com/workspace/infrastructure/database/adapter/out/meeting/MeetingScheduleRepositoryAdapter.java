@@ -5,7 +5,8 @@ import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 import org.springframework.stereotype.Repository;
-import com.workspace.application.port.out.MeetingScheduleRepositoryPort;
+
+import com.workspace.application.port.out.meeting.MeetingScheduleRepositoryPort;
 import com.workspace.domain.model.meeting.MeetingSchedule;
 import com.workspace.infrastructure.database.entity.meeting.MeetingScheduleEntity;
 import com.workspace.infrastructure.database.mapper.meeting.MeetingScheduleMapper;

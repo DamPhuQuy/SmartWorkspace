@@ -3,7 +3,8 @@ package com.workspace.infrastructure.database.adapter.out.user;
 import java.util.Optional;
 import java.util.UUID;
 import org.springframework.stereotype.Repository;
-import com.workspace.application.port.out.PermissionRepositoryPort;
+
+import com.workspace.application.port.out.user.PermissionRepositoryPort;
 import com.workspace.domain.model.user.Permission;
 import com.workspace.infrastructure.database.entity.user.PermissionEntity;
 import com.workspace.infrastructure.database.mapper.user.PermissionMapper;

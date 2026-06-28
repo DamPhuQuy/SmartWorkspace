@@ -5,7 +5,8 @@ import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 import org.springframework.stereotype.Repository;
-import com.workspace.application.port.out.SubmissionRepositoryPort;
+
+import com.workspace.application.port.out.assignment.SubmissionRepositoryPort;
 import com.workspace.domain.model.assignment.Submission;
 import com.workspace.infrastructure.database.entity.assignment.SubmissionEntity;
 import com.workspace.infrastructure.database.mapper.assignment.SubmissionMapper;

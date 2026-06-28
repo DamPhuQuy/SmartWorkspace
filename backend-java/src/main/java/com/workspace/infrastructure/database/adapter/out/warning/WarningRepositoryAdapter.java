@@ -5,7 +5,8 @@ import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 import org.springframework.stereotype.Repository;
-import com.workspace.application.port.out.WarningRepositoryPort;
+
+import com.workspace.application.port.out.warning.WarningRepositoryPort;
 import com.workspace.domain.model.warning.Warning;
 import com.workspace.infrastructure.database.entity.warning.WarningEntity;
 import com.workspace.infrastructure.database.mapper.warning.WarningMapper;

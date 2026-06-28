@@ -1,7 +1,7 @@
 package com.workspace.infrastructure.database.mapper.user;
 
 import com.workspace.domain.model.user.RefreshToken;
-import com.workspace.infrastructure.database.entity.user.RefreshTokenEntity;
+import com.workspace.infrastructure.database.entity.jwt.RefreshTokenEntity;
 
 public class RefreshTokenMapper {
 

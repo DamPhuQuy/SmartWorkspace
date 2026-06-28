@@ -3,7 +3,8 @@ package com.workspace.infrastructure.database.adapter.out.letter;
 import java.util.Optional;
 import java.util.UUID;
 import org.springframework.stereotype.Repository;
-import com.workspace.application.port.out.PostponeLetterRepositoryPort;
+
+import com.workspace.application.port.out.letter.PostponeLetterRepositoryPort;
 import com.workspace.domain.model.letter.PostponeLetter;
 import com.workspace.infrastructure.database.entity.letter.PostponeLetterEntity;
 import com.workspace.infrastructure.database.mapper.letter.PostponeLetterMapper;

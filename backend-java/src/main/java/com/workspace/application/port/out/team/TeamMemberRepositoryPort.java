@@ -1,4 +1,4 @@
-package com.workspace.application.port.out;
+package com.workspace.application.port.out.team;
 
 import java.util.List;
 import java.util.Optional;

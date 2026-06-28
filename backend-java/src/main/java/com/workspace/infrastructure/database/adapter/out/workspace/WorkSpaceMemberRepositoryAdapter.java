@@ -5,7 +5,8 @@ import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 import org.springframework.stereotype.Repository;
-import com.workspace.application.port.out.WorkSpaceMemberRepositoryPort;
+
+import com.workspace.application.port.out.workspace.WorkSpaceMemberRepositoryPort;
 import com.workspace.domain.model.workspace.WorkSpaceMember;
 import com.workspace.infrastructure.database.entity.workspace.WorkSpaceMemberEntity;
 import com.workspace.infrastructure.database.mapper.workspace.WorkSpaceMemberMapper;

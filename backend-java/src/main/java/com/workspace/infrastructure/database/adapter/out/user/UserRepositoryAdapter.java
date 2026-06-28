@@ -5,7 +5,7 @@ import java.util.UUID;
 
 import org.springframework.stereotype.Repository;
 
-import com.workspace.application.port.out.UserRepositoryPort;
+import com.workspace.application.port.out.user.UserRepositoryPort;
 import com.workspace.domain.model.user.User;
 import com.workspace.infrastructure.database.entity.user.UserEntity;
 import com.workspace.infrastructure.database.mapper.user.UserMapper;

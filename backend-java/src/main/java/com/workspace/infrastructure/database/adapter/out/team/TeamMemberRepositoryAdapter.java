@@ -5,7 +5,8 @@ import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 import org.springframework.stereotype.Repository;
-import com.workspace.application.port.out.TeamMemberRepositoryPort;
+
+import com.workspace.application.port.out.team.TeamMemberRepositoryPort;
 import com.workspace.domain.model.team.TeamMember;
 import com.workspace.infrastructure.database.entity.team.TeamMemberEntity;
 import com.workspace.infrastructure.database.mapper.team.TeamMemberMapper;

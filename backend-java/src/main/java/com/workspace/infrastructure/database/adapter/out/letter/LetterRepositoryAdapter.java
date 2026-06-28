@@ -5,7 +5,8 @@ import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 import org.springframework.stereotype.Repository;
-import com.workspace.application.port.out.LetterRepositoryPort;
+
+import com.workspace.application.port.out.letter.LetterRepositoryPort;
 import com.workspace.domain.model.letter.Letter;
 import com.workspace.infrastructure.database.entity.letter.LetterEntity;
 import com.workspace.infrastructure.database.mapper.letter.LetterMapper;

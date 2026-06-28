@@ -5,7 +5,8 @@ import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 import org.springframework.stereotype.Repository;
-import com.workspace.application.port.out.AssignmentRepositoryPort;
+
+import com.workspace.application.port.out.assignment.AssignmentRepositoryPort;
 import com.workspace.domain.model.assignment.Assignment;
 import com.workspace.infrastructure.database.entity.assignment.AssignmentEntity;
 import com.workspace.infrastructure.database.mapper.assignment.AssignmentMapper;
