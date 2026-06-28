@@ -1,4 +1,4 @@
-package com.workspace.infrastructure.database.adapter.out.letter;
+package com.workspace.adapter.out.persistence.letter;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -6,9 +6,6 @@ import org.springframework.stereotype.Repository;
 
 import com.workspace.application.port.out.letter.LateLetterRepositoryPort;
 import com.workspace.domain.model.letter.LateLetter;
-import com.workspace.infrastructure.database.entity.letter.LateLetterEntity;
-import com.workspace.infrastructure.database.mapper.letter.LateLetterMapper;
-import com.workspace.infrastructure.database.repository.letter.LateLetterJpaRepository;
 import lombok.RequiredArgsConstructor;
 
 @Repository

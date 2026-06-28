@@ -1,11 +1,11 @@
-package com.workspace.infrastructure.database.entity.letter;
+package com.workspace.adapter.out.persistence.letter;
 
 import java.time.LocalDate;
 import java.util.UUID;
 
 import org.hibernate.annotations.UuidGenerator;
 
-import com.workspace.infrastructure.database.entity.meeting.MeetingScheduleEntity;
+import com.workspace.adapter.out.persistence.meeting.MeetingScheduleEntity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

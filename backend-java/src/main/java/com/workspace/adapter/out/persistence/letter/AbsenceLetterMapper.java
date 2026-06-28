@@ -1,8 +1,7 @@
-package com.workspace.infrastructure.database.mapper.letter;
+package com.workspace.adapter.out.persistence.letter;
 
 import com.workspace.domain.model.letter.AbsenceLetter;
-import com.workspace.infrastructure.database.entity.letter.AbsenceLetterEntity;
-import com.workspace.infrastructure.database.mapper.meeting.MeetingScheduleMapper;
+import com.workspace.adapter.out.persistence.meeting.MeetingScheduleMapper;
 
 public class AbsenceLetterMapper {
 

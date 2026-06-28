@@ -1,8 +1,7 @@
-package com.workspace.infrastructure.database.mapper.letter;
+package com.workspace.adapter.out.persistence.letter;
 
 import com.workspace.domain.model.letter.PostponeLetter;
-import com.workspace.infrastructure.database.entity.letter.PostponeLetterEntity;
-import com.workspace.infrastructure.database.mapper.assignment.AssignmentMapper;
+import com.workspace.adapter.out.persistence.assignment.AssignmentMapper;
 
 public class PostponeLetterMapper {
 

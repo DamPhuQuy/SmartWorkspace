@@ -1,11 +1,12 @@
-package com.workspace.infrastructure.database.entity.letter;
+package com.workspace.adapter.out.persistence.letter;
 
 import java.time.Instant;
+import java.time.LocalDate;
 import java.util.UUID;
 
 import org.hibernate.annotations.UuidGenerator;
 
-import com.workspace.infrastructure.database.entity.assignment.AssignmentEntity;
+import com.workspace.adapter.out.persistence.meeting.MeetingScheduleEntity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -25,11 +26,11 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Table(
-    name = "workspace_member_assignment_postpone_letters",
+    name = "workspace_member_late_letters",
     indexes = {
         @Index(
-            name = "idx_postpone_letter_assignment_deadlines",
-            columnList = "assignment_id, old_deadline, requested_deadline"
+            name = "idx_workspace_member_late_letter_schedule_date",
+            columnList = "workspace_meeting_schedule_id, late_date"
         )
     }
 )
@@ -37,7 +38,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Getter
 @Builder
-public class PostponeLetterEntity {
+public class LateLetterEntity {
 
     @Id
     @GeneratedValue
@@ -50,15 +51,12 @@ public class PostponeLetterEntity {
     private LetterEntity letter;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "assignment_id", nullable = false)
-    private AssignmentEntity assignment;
+    @JoinColumn(name = "workspace_meeting_schedule_id", nullable = false)
+    private MeetingScheduleEntity workspaceMeetingSchedule;
 
-    @Column(name = "assignment_snapshot")
-    private String assignmentSnapshot;
+    @Column(name = "late_date", nullable = false)
+    private LocalDate lateDate;
 
-    @Column(name = "old_deadline", nullable = false)
-    private Instant oldDeadline;
-
-    @Column(name = "requested_deadline", nullable = false)
-    private Instant requestedDeadline;
+    @Column(name = "expected_arrival_time", nullable = false)
+    private Instant expectedArrivalTime;
 }

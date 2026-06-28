@@ -1,4 +1,4 @@
-package com.workspace.infrastructure.database.adapter.out.letter;
+package com.workspace.adapter.out.persistence.letter;
 
 import java.util.List;
 import java.util.Optional;
@@ -8,9 +8,6 @@ import org.springframework.stereotype.Repository;
 
 import com.workspace.application.port.out.letter.LetterRepositoryPort;
 import com.workspace.domain.model.letter.Letter;
-import com.workspace.infrastructure.database.entity.letter.LetterEntity;
-import com.workspace.infrastructure.database.mapper.letter.LetterMapper;
-import com.workspace.infrastructure.database.repository.letter.LetterJpaRepository;
 import lombok.RequiredArgsConstructor;
 
 @Repository

@@ -1,8 +1,7 @@
-package com.workspace.infrastructure.database.mapper.letter;
+package com.workspace.adapter.out.persistence.letter;
 
 import com.workspace.domain.model.letter.Letter;
-import com.workspace.infrastructure.database.entity.letter.LetterEntity;
-import com.workspace.infrastructure.database.mapper.workspace.WorkSpaceMemberMapper;
+import com.workspace.adapter.out.persistence.workspace.WorkSpaceMemberMapper;
 
 public class LetterMapper {
 
