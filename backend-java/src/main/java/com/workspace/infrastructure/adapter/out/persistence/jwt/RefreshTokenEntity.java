@@ -1,4 +1,6 @@
-package com.workspace.infrastructure.adapter.out.persistence.user;
+package com.workspace.infrastructure.adapter.out.persistence.jwt;
+
+import com.workspace.infrastructure.adapter.out.persistence.user.UserEntity;
 
 import java.time.Instant;
 import java.util.UUID;

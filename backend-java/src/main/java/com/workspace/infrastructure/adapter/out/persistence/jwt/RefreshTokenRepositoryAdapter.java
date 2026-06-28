@@ -1,4 +1,4 @@
-package com.workspace.infrastructure.adapter.out.persistence.user;
+package com.workspace.infrastructure.adapter.out.persistence.jwt;
 
 import java.util.List;
 import java.util.Optional;
@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Repository;
 
 import com.workspace.application.port.out.jwt.RefreshTokenRepositoryPort;
-import com.workspace.domain.model.user.RefreshToken;
+import com.workspace.domain.model.jwt.RefreshToken;
 import lombok.RequiredArgsConstructor;
 
 @Repository

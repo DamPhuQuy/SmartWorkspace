@@ -1,6 +1,8 @@
-package com.workspace.infrastructure.adapter.out.persistence.user;
+package com.workspace.infrastructure.adapter.out.persistence.jwt;
 
-import com.workspace.domain.model.user.RefreshToken;
+import com.workspace.infrastructure.adapter.out.persistence.user.UserMapper;
+
+import com.workspace.domain.model.jwt.RefreshToken;
 
 public class RefreshTokenMapper {
 

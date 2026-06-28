@@ -1,4 +1,6 @@
-package com.workspace.domain.model.user;
+package com.workspace.domain.model.jwt;
+
+import com.workspace.domain.model.user.User;
 
 import java.time.Instant;
 import java.util.UUID;
