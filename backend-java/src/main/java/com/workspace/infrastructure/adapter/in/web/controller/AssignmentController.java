@@ -2,9 +2,9 @@ package com.workspace.infrastructure.adapter.in.web.controller;
 
 import org.springframework.web.bind.annotation.*;
 
-import com.workspace.application.port.in.assignment.AssignAssignmentUseCase;
-import com.workspace.application.port.in.assignment.CreateAssignmentUseCase;
-import com.workspace.application.port.in.assignment.SubmitAssignmentUseCase;
+import com.workspace.application.port.in.assignment.command.AssignAssignmentUseCase;
+import com.workspace.application.port.in.assignment.command.CreateAssignmentUseCase;
+import com.workspace.application.port.in.assignment.command.SubmitAssignmentUseCase;
 import com.workspace.domain.model.assignment.Assignment;
 import com.workspace.domain.model.assignment.Assignee;
 import com.workspace.domain.model.assignment.Submission;

@@ -3,8 +3,8 @@ package com.workspace.infrastructure.adapter.in.web.controller;
 import java.util.UUID;
 import org.springframework.web.bind.annotation.*;
 
-import com.workspace.application.port.in.meeting.CreateMeetingScheduleUseCase;
-import com.workspace.application.port.in.meeting.DeleteMeetingScheduleUseCase;
+import com.workspace.application.port.in.meeting.command.CreateMeetingScheduleUseCase;
+import com.workspace.application.port.in.meeting.command.DeleteMeetingScheduleUseCase;
 import com.workspace.domain.model.meeting.MeetingSchedule;
 import com.workspace.infrastructure.adapter.in.web.common.ApiResponse;
 import com.workspace.infrastructure.adapter.in.web.dto.MeetingDto;
