@@ -3,9 +3,9 @@ package com.workspace.infrastructure.adapter.in.web.controller;
 import java.util.UUID;
 import org.springframework.web.bind.annotation.*;
 
-import com.workspace.application.port.in.user.CreateUserUseCase;
-import com.workspace.application.port.in.user.GetUserUseCase;
-import com.workspace.application.port.in.user.UpdateUserProfileUseCase;
+import com.workspace.application.port.in.user.command.CreateUserUseCase;
+import com.workspace.application.port.in.user.query.GetUserUseCase;
+import com.workspace.application.port.in.user.command.UpdateUserProfileUseCase;
 import com.workspace.domain.model.user.User;
 import com.workspace.domain.model.user.UserProfile;
 import com.workspace.infrastructure.adapter.in.web.common.ApiResponse;

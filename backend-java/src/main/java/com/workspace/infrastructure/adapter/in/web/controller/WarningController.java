@@ -2,7 +2,7 @@ package com.workspace.infrastructure.adapter.in.web.controller;
 
 import org.springframework.web.bind.annotation.*;
 
-import com.workspace.application.port.in.warning.IssueWarningUseCase;
+import com.workspace.application.port.in.warning.command.IssueWarningUseCase;
 import com.workspace.domain.model.warning.Warning;
 import com.workspace.infrastructure.adapter.in.web.common.ApiResponse;
 import com.workspace.infrastructure.adapter.in.web.dto.WarningDto;

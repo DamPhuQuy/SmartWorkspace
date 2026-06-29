@@ -3,10 +3,10 @@ package com.workspace.infrastructure.adapter.in.web.controller;
 import java.util.UUID;
 import org.springframework.web.bind.annotation.*;
 
-import com.workspace.application.port.in.team.AddTeamMemberUseCase;
-import com.workspace.application.port.in.team.CreateTeamUseCase;
-import com.workspace.application.port.in.team.DeleteTeamUseCase;
-import com.workspace.application.port.in.team.RemoveTeamMemberUseCase;
+import com.workspace.application.port.in.team.command.AddTeamMemberUseCase;
+import com.workspace.application.port.in.team.command.CreateTeamUseCase;
+import com.workspace.application.port.in.team.command.DeleteTeamUseCase;
+import com.workspace.application.port.in.team.command.RemoveTeamMemberUseCase;
 import com.workspace.domain.model.team.Team;
 import com.workspace.domain.model.team.TeamMember;
 import com.workspace.infrastructure.adapter.in.web.common.ApiResponse;

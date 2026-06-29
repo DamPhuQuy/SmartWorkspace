@@ -3,10 +3,10 @@ package com.workspace.infrastructure.adapter.in.web.controller;
 import java.util.UUID;
 import org.springframework.web.bind.annotation.*;
 
-import com.workspace.application.port.in.letter.ReviewLetterUseCase;
-import com.workspace.application.port.in.letter.SubmitAbsenceLetterUseCase;
-import com.workspace.application.port.in.letter.SubmitLateLetterUseCase;
-import com.workspace.application.port.in.letter.SubmitPostponeLetterUseCase;
+import com.workspace.application.port.in.letter.command.ReviewLetterUseCase;
+import com.workspace.application.port.in.letter.command.SubmitAbsenceLetterUseCase;
+import com.workspace.application.port.in.letter.command.SubmitLateLetterUseCase;
+import com.workspace.application.port.in.letter.command.SubmitPostponeLetterUseCase;
 import com.workspace.domain.model.letter.AbsenceLetter;
 import com.workspace.domain.model.letter.LateLetter;
 import com.workspace.domain.model.letter.Letter;

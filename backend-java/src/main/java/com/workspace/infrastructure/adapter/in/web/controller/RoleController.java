@@ -3,9 +3,9 @@ package com.workspace.infrastructure.adapter.in.web.controller;
 import java.util.UUID;
 import org.springframework.web.bind.annotation.*;
 
-import com.workspace.application.port.in.role.AssignWorkspaceMemberRoleUseCase;
-import com.workspace.application.port.in.role.CreateRoleUseCase;
-import com.workspace.application.port.in.role.DeleteRoleUseCase;
+import com.workspace.application.port.in.role.command.AssignWorkspaceMemberRoleUseCase;
+import com.workspace.application.port.in.role.command.CreateRoleUseCase;
+import com.workspace.application.port.in.role.command.DeleteRoleUseCase;
 import com.workspace.domain.model.role.Role;
 import com.workspace.domain.model.workspace.WorkspaceMemberRole;
 import com.workspace.infrastructure.adapter.in.web.common.ApiResponse;
