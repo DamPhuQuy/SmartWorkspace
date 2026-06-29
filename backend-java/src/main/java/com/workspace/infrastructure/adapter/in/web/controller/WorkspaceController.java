@@ -3,11 +3,11 @@ package com.workspace.infrastructure.adapter.in.web.controller;
 import java.util.UUID;
 import org.springframework.web.bind.annotation.*;
 
-import com.workspace.application.port.in.workspace.AddWorkspaceMemberUseCase;
-import com.workspace.application.port.in.workspace.CreateWorkspaceUseCase;
-import com.workspace.application.port.in.workspace.DeleteWorkspaceUseCase;
-import com.workspace.application.port.in.workspace.RemoveWorkspaceMemberUseCase;
-import com.workspace.application.port.in.workspace.UpdateWorkspaceUseCase;
+import com.workspace.application.port.in.workspace.command.AddWorkspaceMemberUseCase;
+import com.workspace.application.port.in.workspace.command.CreateWorkspaceUseCase;
+import com.workspace.application.port.in.workspace.command.DeleteWorkspaceUseCase;
+import com.workspace.application.port.in.workspace.command.RemoveWorkspaceMemberUseCase;
+import com.workspace.application.port.in.workspace.command.UpdateWorkspaceUseCase;
 import com.workspace.domain.model.workspace.Workspace;
 import com.workspace.domain.model.workspace.WorkspaceMember;
 import com.workspace.infrastructure.adapter.in.web.common.ApiResponse;
