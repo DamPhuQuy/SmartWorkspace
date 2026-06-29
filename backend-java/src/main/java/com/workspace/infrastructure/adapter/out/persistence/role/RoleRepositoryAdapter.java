@@ -62,7 +62,7 @@ public class RoleRepositoryAdapter implements RoleRepositoryPort {
 
     @Override
     public Optional<Permission> findPermissionByName(String name) {
-        return permissionJpaRepository.findByName(name)
+        return permissionJpaRepository.findByCode(name)
                 .map(PermissionMapper::toDomain);
     }
 
@@ -75,7 +75,7 @@ public class RoleRepositoryAdapter implements RoleRepositoryPort {
 
     @Override
     public boolean existsPermissionByName(String name) {
-        return permissionJpaRepository.existsByName(name);
+        return permissionJpaRepository.existsByCode(name);
     }
 
     @Override

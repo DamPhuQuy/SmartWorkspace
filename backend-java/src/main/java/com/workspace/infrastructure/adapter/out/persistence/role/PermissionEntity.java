@@ -28,9 +28,9 @@ public class PermissionEntity {
     private UUID id;
 
     @Column(
-        name = "name",
+        name = "code",
         nullable = false,
         unique = true
     )
-    private String name;
+    private String code;
 }

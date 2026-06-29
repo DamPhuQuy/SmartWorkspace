@@ -13,7 +13,7 @@ public class PermissionMapper {
 
         return Permission.builder()
                 .id(entity.getId())
-                .name(entity.getName())
+                .name(entity.getCode())
                 .build();
     }
 
@@ -23,8 +23,8 @@ public class PermissionMapper {
         }
 
         return PermissionEntity.builder()
-                .id(domain.getId())
-                .name(domain.getName())
-                .build();
+            .id(domain.getId())
+            .code(domain.getName())
+            .build();
     }
 }
