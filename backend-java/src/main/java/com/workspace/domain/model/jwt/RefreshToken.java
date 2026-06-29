@@ -1,9 +1,10 @@
 package com.workspace.domain.model.jwt;
 
-import com.workspace.domain.model.user.User;
-
 import java.time.Instant;
 import java.util.UUID;
+
+import com.workspace.domain.model.user.User;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -16,7 +17,7 @@ import lombok.NoArgsConstructor;
 public class RefreshToken {
     private UUID id;
     private User user;
-    private String token;
+    private String tokenHash;
     private Instant expiresAt;
     private Instant revokedAt;
     private Instant createdAt;

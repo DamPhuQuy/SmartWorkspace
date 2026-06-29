@@ -2,7 +2,9 @@ package com.workspace.domain.model.meeting;
 
 import java.time.Instant;
 import java.util.UUID;
+
 import com.workspace.domain.model.workspace.Workspace;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -18,6 +20,8 @@ public class MeetingSchedule {
     private String title;
     private Instant startTime;
     private Instant endTime;
+    private String location;
+    private String description;
     private Instant createdAt;
     private Instant updatedAt;
 }

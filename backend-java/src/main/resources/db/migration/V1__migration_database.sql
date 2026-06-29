@@ -8,7 +8,6 @@ CREATE TABLE users (
     created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
 );
-CREATE INDEX idx_users_email_phone ON users(email, phone);
 
 -- 2. User Profiles table
 CREATE TABLE user_profiles (
@@ -100,6 +99,8 @@ CREATE TABLE workspace_meeting_schedules (
     title VARCHAR(255) NOT NULL,
     start_time TIMESTAMPTZ NOT NULL,
     end_time TIMESTAMPTZ NOT NULL,
+    location VARCHAR(255),
+    description TEXT,
     created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT uk_workspace_meeting_title UNIQUE (workspace_id, title)
@@ -192,155 +193,11 @@ CREATE INDEX idx_postpone_letter_assignment_deadlines ON workspace_member_assign
 CREATE TABLE refresh_tokens (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     user_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-    token VARCHAR(255) NOT NULL UNIQUE,
+    token_hash VARCHAR(255) NOT NULL UNIQUE,
     expires_at TIMESTAMPTZ NOT NULL,
     revoked_at TIMESTAMPTZ,
     created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
 );
 
--- 21. Cross-table Workspace Validation Triggers
 
--- Validate workspace_member_roles: member and role must be in the same workspace
-CREATE OR REPLACE FUNCTION validate_workspace_member_role()
-RETURNS TRIGGER AS $$
-BEGIN
-    IF (SELECT workspace_id FROM workspace_members WHERE id = NEW.workspace_member_id) !=
-       (SELECT workspace_id FROM roles WHERE id = NEW.role_id) THEN
-        RAISE EXCEPTION 'Workspace Member and Role must belong to the same workspace';
-    END IF;
-    RETURN NEW;
-END;
-$$ LANGUAGE plpgsql;
-
-CREATE TRIGGER trg_validate_workspace_member_role
-BEFORE INSERT OR UPDATE ON workspace_member_roles
-FOR EACH ROW EXECUTE FUNCTION validate_workspace_member_role();
-
--- Validate team_members: team and member must be in the same workspace
-CREATE OR REPLACE FUNCTION validate_team_member()
-RETURNS TRIGGER AS $$
-BEGIN
-    IF (SELECT workspace_id FROM teams WHERE id = NEW.team_id) !=
-       (SELECT workspace_id FROM workspace_members WHERE id = NEW.workspace_member_id) THEN
-        RAISE EXCEPTION 'Team and Workspace Member must belong to the same workspace';
-    END IF;
-    RETURN NEW;
-END;
-$$ LANGUAGE plpgsql;
-
-CREATE TRIGGER trg_validate_team_member
-BEFORE INSERT OR UPDATE ON team_members
-FOR EACH ROW EXECUTE FUNCTION validate_team_member();
-
--- Validate assignments creator: creator member must be in the same workspace as the assignment
-CREATE OR REPLACE FUNCTION validate_assignment_creator()
-RETURNS TRIGGER AS $$
-BEGIN
-    IF NEW.workspace_id != (SELECT workspace_id FROM workspace_members WHERE id = NEW.created_by) THEN
-        RAISE EXCEPTION 'Assignment creator must belong to the same workspace as the assignment';
-    END IF;
-    RETURN NEW;
-END;
-$$ LANGUAGE plpgsql;
-
-CREATE TRIGGER trg_validate_assignment_creator
-BEFORE INSERT OR UPDATE ON assignments
-FOR EACH ROW EXECUTE FUNCTION validate_assignment_creator();
-
--- Validate assignment_assignees: assignee member must be in the same workspace as the assignment
-CREATE OR REPLACE FUNCTION validate_assignment_assignee()
-RETURNS TRIGGER AS $$
-BEGIN
-    IF (SELECT workspace_id FROM assignments WHERE id = NEW.assignment_id) !=
-       (SELECT workspace_id FROM workspace_members WHERE id = NEW.workspace_member_id) THEN
-        RAISE EXCEPTION 'Assignment and Assignee must belong to the same workspace';
-    END IF;
-    RETURN NEW;
-END;
-$$ LANGUAGE plpgsql;
-
-CREATE TRIGGER trg_validate_assignment_assignee
-BEFORE INSERT OR UPDATE ON assignment_assignees
-FOR EACH ROW EXECUTE FUNCTION validate_assignment_assignee();
-
--- Validate workspace_member_absence_letters: letter member and meeting schedule must be in the same workspace
-CREATE OR REPLACE FUNCTION validate_absence_letter()
-RETURNS TRIGGER AS $$
-DECLARE
-    letter_workspace_id UUID;
-    meeting_workspace_id UUID;
-BEGIN
-    SELECT m.workspace_id INTO letter_workspace_id 
-    FROM workspace_member_letters l
-    JOIN workspace_members m ON l.workspace_member_id = m.id
-    WHERE l.id = NEW.letter_id;
-
-    SELECT workspace_id INTO meeting_workspace_id
-    FROM workspace_meeting_schedules
-    WHERE id = NEW.workspace_meeting_schedule_id;
-
-    IF letter_workspace_id != meeting_workspace_id THEN
-        RAISE EXCEPTION 'Absence letter and meeting schedule must belong to the same workspace';
-    END IF;
-    RETURN NEW;
-END;
-$$ LANGUAGE plpgsql;
-
-CREATE TRIGGER trg_validate_absence_letter
-BEFORE INSERT OR UPDATE ON workspace_member_absence_letters
-FOR EACH ROW EXECUTE FUNCTION validate_absence_letter();
-
--- Validate workspace_member_late_letters: letter member and meeting schedule must be in the same workspace
-CREATE OR REPLACE FUNCTION validate_late_letter()
-RETURNS TRIGGER AS $$
-DECLARE
-    letter_workspace_id UUID;
-    meeting_workspace_id UUID;
-BEGIN
-    SELECT m.workspace_id INTO letter_workspace_id 
-    FROM workspace_member_letters l
-    JOIN workspace_members m ON l.workspace_member_id = m.id
-    WHERE l.id = NEW.letter_id;
-
-    SELECT workspace_id INTO meeting_workspace_id
-    FROM workspace_meeting_schedules
-    WHERE id = NEW.workspace_meeting_schedule_id;
-
-    IF letter_workspace_id != meeting_workspace_id THEN
-        RAISE EXCEPTION 'Late letter and meeting schedule must belong to the same workspace';
-    END IF;
-    RETURN NEW;
-END;
-$$ LANGUAGE plpgsql;
-
-CREATE TRIGGER trg_validate_late_letter
-BEFORE INSERT OR UPDATE ON workspace_member_late_letters
-FOR EACH ROW EXECUTE FUNCTION validate_late_letter();
-
--- Validate workspace_member_assignment_postpone_letters: letter member and assignment must be in the same workspace
-CREATE OR REPLACE FUNCTION validate_postpone_letter()
-RETURNS TRIGGER AS $$
-DECLARE
-    letter_workspace_id UUID;
-    assignment_workspace_id UUID;
-BEGIN
-    SELECT m.workspace_id INTO letter_workspace_id 
-    FROM workspace_member_letters l
-    JOIN workspace_members m ON l.workspace_member_id = m.id
-    WHERE l.id = NEW.letter_id;
-
-    SELECT workspace_id INTO assignment_workspace_id
-    FROM assignments
-    WHERE id = NEW.assignment_id;
-
-    IF letter_workspace_id != assignment_workspace_id THEN
-        RAISE EXCEPTION 'Postpone letter and assignment must belong to the same workspace';
-    END IF;
-    RETURN NEW;
-END;
-$$ LANGUAGE plpgsql;
-
-CREATE TRIGGER trg_validate_postpone_letter
-BEFORE INSERT OR UPDATE ON workspace_member_assignment_postpone_letters
-FOR EACH ROW EXECUTE FUNCTION validate_postpone_letter();
