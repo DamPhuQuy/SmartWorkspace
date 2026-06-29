@@ -1,0 +1,15 @@
+package com.workspace.infrastructure.adapter.out.persistence.assignment.repository;
+
+import com.workspace.infrastructure.adapter.out.persistence.assignment.entity.AssignmentEntity;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface AssignmentJpaRepository extends JpaRepository<AssignmentEntity, UUID> {
+    Optional<AssignmentEntity> findByWorkspaceIdAndTitle(UUID workspaceId, String title);
+    List<AssignmentEntity> findByWorkspaceId(UUID workspaceId);
+    List<AssignmentEntity> findByCreatedById(UUID createdById);
+    boolean existsByWorkspaceIdAndTitle(UUID workspaceId, String title);
+}
