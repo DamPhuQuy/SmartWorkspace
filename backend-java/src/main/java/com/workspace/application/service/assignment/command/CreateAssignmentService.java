@@ -33,7 +33,7 @@ public class CreateAssignmentService implements CreateAssignmentUseCase {
         WorkspaceMember creator = workspaceRepositoryPort.findMemberById(command.createdById())
                 .orElseThrow(() -> new ResourceNotFoundException("Workspace member with ID " + command.createdById() + " not found"));
 
-        if (!creator.getWorkspace().getId().equals(command.workspaceId())) {
+        if (!creator.getWorkspaceId().equals(command.workspaceId())) {
             throw new DomainException("Creator must belong to the same workspace");
         }
 

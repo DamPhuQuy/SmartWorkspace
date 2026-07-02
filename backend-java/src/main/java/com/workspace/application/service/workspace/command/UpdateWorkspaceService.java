@@ -40,7 +40,7 @@ public class UpdateWorkspaceService implements UpdateWorkspaceUseCase {
                 .name(command.name() != null ? command.name() : existingWorkspace.getName())
                 .slug(command.slug() != null ? command.slug() : existingWorkspace.getSlug())
                 .description(command.description() != null ? command.description() : existingWorkspace.getDescription())
-                .owner(existingWorkspace.getOwner())
+                .ownerId(existingWorkspace.getOwnerId())
                 .createdAt(existingWorkspace.getCreatedAt())
                 .updatedAt(Instant.now())
                 .build();

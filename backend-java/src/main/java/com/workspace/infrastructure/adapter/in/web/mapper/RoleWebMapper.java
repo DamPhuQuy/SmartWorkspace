@@ -30,12 +30,10 @@ public class RoleWebMapper {
             return null;
         }
 
-        UUID memberId = memberRole.getWorkspaceMember() != null ? memberRole.getWorkspaceMember().getId() : null;
-
         return new RoleDto.WorkspaceMemberRoleResponse(
             memberRole.getId(),
-            memberId,
-            toResponse(memberRole.getRole())
+            memberRole.getWorkspaceMemberId(),
+            memberRole.getRoleId()
         );
     }
 }

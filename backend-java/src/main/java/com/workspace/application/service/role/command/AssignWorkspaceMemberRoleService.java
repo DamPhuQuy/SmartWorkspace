@@ -33,7 +33,7 @@ public class AssignWorkspaceMemberRoleService implements AssignWorkspaceMemberRo
                 .orElseThrow(() -> new ResourceNotFoundException("Role with ID " + command.roleId() + " not found"));
 
         // Ensure role belongs to the same workspace as the member
-        if (!role.getWorkspace().getId().equals(member.getWorkspace().getId())) {
+        if (!role.getWorkspace().getId().equals(member.getWorkspaceId())) {
             throw new DomainException("Role must belong to the same workspace as the member");
         }
 
@@ -41,11 +41,7 @@ public class AssignWorkspaceMemberRoleService implements AssignWorkspaceMemberRo
             throw new DomainException("Member already has this role assigned");
         }
 
-        WorkspaceMemberRole memberRole = WorkspaceMemberRole.builder()
-                .id(UUID.randomUUID())
-                .workspaceMember(member)
-                .role(role)
-                .build();
+        WorkspaceMemberRole memberRole = WorkspaceMemberRole.assign(member.getId(), role.getId());
 
         return workspaceRepositoryPort.saveMemberRole(memberRole);
     }

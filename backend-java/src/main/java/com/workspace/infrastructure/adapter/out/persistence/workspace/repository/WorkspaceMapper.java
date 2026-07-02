@@ -1,7 +1,7 @@
 package com.workspace.infrastructure.adapter.out.persistence.workspace.repository;
 
 import com.workspace.domain.model.workspace.Workspace;
-import com.workspace.infrastructure.adapter.out.persistence.user.repository.UserMapper;
+import com.workspace.infrastructure.adapter.out.persistence.user.entity.UserEntity;
 import com.workspace.infrastructure.adapter.out.persistence.workspace.entity.WorkspaceEntity;
 
 
@@ -19,7 +19,7 @@ public class WorkspaceMapper {
                 .name(entity.getName())
                 .slug(entity.getSlug())
                 .description(entity.getDescription())
-                .owner(UserMapper.toDomain(entity.getOwner()))
+                .ownerId(entity.getOwner() != null ? entity.getOwner().getId() : null)
                 .createdAt(entity.getCreatedAt())
                 .updatedAt(entity.getUpdatedAt())
                 .build();
@@ -35,7 +35,7 @@ public class WorkspaceMapper {
                 .name(domain.getName())
                 .slug(domain.getSlug())
                 .description(domain.getDescription())
-                .owner(UserMapper.toEntity(domain.getOwner()))
+                .owner(domain.getOwnerId() != null ? UserEntity.builder().id(domain.getOwnerId()).build() : null)
                 .createdAt(domain.getCreatedAt())
                 .updatedAt(domain.getUpdatedAt())
                 .build();

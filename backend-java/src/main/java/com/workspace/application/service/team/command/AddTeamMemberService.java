@@ -34,7 +34,7 @@ public class AddTeamMemberService implements AddTeamMemberUseCase {
                 .orElseThrow(() -> new ResourceNotFoundException("Workspace member with ID " + command.workspaceMemberId() + " not found"));
 
         // Ensure both belong to the same workspace
-        if (!team.getWorkspace().getId().equals(member.getWorkspace().getId())) {
+        if (!team.getWorkspace().getId().equals(member.getWorkspaceId())) {
             throw new DomainException("Team and workspace member must belong to the same workspace");
         }
 

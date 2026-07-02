@@ -37,12 +37,7 @@ public class AddWorkspaceMemberService implements AddWorkspaceMemberUseCase {
             throw new DomainException("User is already a member of this workspace");
         }
 
-        WorkspaceMember member = WorkspaceMember.builder()
-                .id(UUID.randomUUID())
-                .workspace(workspace)
-                .user(user)
-                .joinedAt(Instant.now())
-                .build();
+        WorkspaceMember member = WorkspaceMember.join(workspace.getId(), user.getId());
 
         return workspaceRepositoryPort.saveMember(member);
     }

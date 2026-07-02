@@ -36,7 +36,7 @@ public class SubmitPostponeLetterService implements SubmitPostponeLetterUseCase 
         Assignment assignment = assignmentRepositoryPort.findById(command.assignmentId())
                 .orElseThrow(() -> new ResourceNotFoundException("Assignment with ID " + command.assignmentId() + " not found"));
 
-        if (!member.getWorkspace().getId().equals(assignment.getWorkspace().getId())) {
+        if (!member.getWorkspaceId().equals(assignment.getWorkspace().getId())) {
             throw new DomainException("Workspace member and assignment must belong to the same workspace");
         }
 

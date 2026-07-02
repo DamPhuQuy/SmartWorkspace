@@ -28,7 +28,7 @@ public final class WorkspaceDto {
         String name,
         String slug,
         String description,
-        UserDto.UserResponse owner,
+        UUID ownerId,
         Instant createdAt,
         Instant updatedAt
     ) {}
@@ -36,7 +36,7 @@ public final class WorkspaceDto {
     public record WorkspaceMemberResponse(
         UUID id,
         UUID workspaceId,
-        UserDto.UserResponse user,
+        UUID userId,
         Instant joinedAt
     ) {}
 }

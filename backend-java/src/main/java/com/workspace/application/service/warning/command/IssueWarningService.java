@@ -28,14 +28,12 @@ public class IssueWarningService implements IssueWarningUseCase {
         WorkspaceMember member = workspaceRepositoryPort.findMemberById(command.workspaceMemberId())
                 .orElseThrow(() -> new ResourceNotFoundException("Workspace member with ID " + command.workspaceMemberId() + " not found"));
 
-        Warning warning = Warning.builder()
-                .id(UUID.randomUUID())
-                .workspaceMember(member)
-                .warningType(command.warningType())
-                .description(command.description())
-                .createdAt(Instant.now())
-                .updatedAt(Instant.now())
-                .build();
+        Warning warning = new Warning(
+                UUID.randomUUID(),
+                member.getId(),
+                com.workspace.domain.model.warning.WarningType.valueOf(command.warningType()),
+                command.description()
+        );
 
         return warningRepositoryPort.save(warning);
     }

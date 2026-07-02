@@ -33,7 +33,7 @@ public class AssignAssignmentService implements AssignAssignmentUseCase {
         WorkspaceMember member = workspaceRepositoryPort.findMemberById(command.workspaceMemberId())
                 .orElseThrow(() -> new ResourceNotFoundException("Workspace member with ID " + command.workspaceMemberId() + " not found"));
 
-        if (!assignment.getWorkspace().getId().equals(member.getWorkspace().getId())) {
+        if (!assignment.getWorkspace().getId().equals(member.getWorkspaceId())) {
             throw new DomainException("Workspace member must belong to the same workspace as the assignment");
         }
 

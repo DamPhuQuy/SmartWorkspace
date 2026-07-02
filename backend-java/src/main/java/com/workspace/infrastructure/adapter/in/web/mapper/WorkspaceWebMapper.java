@@ -19,7 +19,7 @@ public class WorkspaceWebMapper {
             workspace.getName(),
             workspace.getSlug(),
             workspace.getDescription(),
-            UserWebMapper.toResponse(workspace.getOwner()),
+            workspace.getOwnerId(),
             workspace.getCreatedAt(),
             workspace.getUpdatedAt()
         );
@@ -30,12 +30,10 @@ public class WorkspaceWebMapper {
             return null;
         }
 
-        UUID workspaceId = member.getWorkspace() != null ? member.getWorkspace().getId() : null;
-
         return new WorkspaceDto.WorkspaceMemberResponse(
             member.getId(),
-            workspaceId,
-            UserWebMapper.toResponse(member.getUser()),
+            member.getWorkspaceId(),
+            member.getUserId(),
             member.getJoinedAt()
         );
     }
