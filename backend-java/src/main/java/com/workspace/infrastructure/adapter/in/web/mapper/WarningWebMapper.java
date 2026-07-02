@@ -14,8 +14,8 @@ public class WarningWebMapper {
 
         return new WarningDto.WarningResponse(
             warning.getId(),
-            WorkspaceWebMapper.toMemberResponse(warning.getWorkspaceMember()),
-            warning.getWarningType(),
+            warning.getWorkspaceMemberId(),
+            warning.getWarningType() != null ? warning.getWarningType().name() : null,
             warning.getDescription(),
             warning.getCreatedAt(),
             warning.getUpdatedAt()

@@ -44,7 +44,7 @@ public class CreateWorkspaceService implements CreateWorkspaceUseCase {
                 .name(command.name())
                 .slug(command.slug())
                 .description(command.description())
-                .owner(owner)
+                .ownerId(owner.getId())
                 .createdAt(Instant.now())
                 .updatedAt(Instant.now())
                 .build();
@@ -52,12 +52,7 @@ public class CreateWorkspaceService implements CreateWorkspaceUseCase {
         Workspace savedWorkspace = workspaceRepositoryPort.save(workspace);
 
         // Owner becomes the first member of the workspace
-        WorkspaceMember ownerMember = WorkspaceMember.builder()
-                .id(UUID.randomUUID())
-                .workspace(savedWorkspace)
-                .user(owner)
-                .joinedAt(Instant.now())
-                .build();
+        WorkspaceMember ownerMember = WorkspaceMember.join(savedWorkspace.getId(), owner.getId());
 
         workspaceRepositoryPort.saveMember(ownerMember);
 

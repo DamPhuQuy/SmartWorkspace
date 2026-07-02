@@ -28,7 +28,7 @@ public class RemoveWorkspaceMemberService implements RemoveWorkspaceMemberUseCas
                 .orElseThrow(() -> new ResourceNotFoundException("Workspace member with User ID " + command.userId() + " not found in workspace"));
 
         // Owners cannot be removed from their own workspace
-        if (workspace.getOwner().getId().equals(command.userId())) {
+        if (workspace.getOwnerId().equals(command.userId())) {
             throw new DomainException("The workspace owner cannot be removed from the workspace");
         }
 

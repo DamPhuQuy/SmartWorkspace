@@ -36,7 +36,7 @@ public class SubmitLateLetterService implements SubmitLateLetterUseCase {
         MeetingSchedule meeting = meetingScheduleRepositoryPort.findById(command.meetingScheduleId())
                 .orElseThrow(() -> new ResourceNotFoundException("Meeting schedule with ID " + command.meetingScheduleId() + " not found"));
 
-        if (!member.getWorkspace().getId().equals(meeting.getWorkspace().getId())) {
+        if (!member.getWorkspaceId().equals(meeting.getWorkspace().getId())) {
             throw new DomainException("Workspace member and meeting schedule must belong to the same workspace");
         }
 

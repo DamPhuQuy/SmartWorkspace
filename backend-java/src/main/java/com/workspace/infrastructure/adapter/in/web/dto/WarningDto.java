@@ -14,7 +14,7 @@ public final class WarningDto {
 
     public record WarningResponse(
         UUID id,
-        WorkspaceDto.WorkspaceMemberResponse workspaceMember,
+        UUID workspaceMemberId,
         String warningType,
         String description,
         Instant createdAt,

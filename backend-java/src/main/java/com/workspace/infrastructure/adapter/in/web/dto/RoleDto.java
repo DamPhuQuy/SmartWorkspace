@@ -27,6 +27,6 @@ public final class RoleDto {
     public record WorkspaceMemberRoleResponse(
         UUID id,
         UUID workspaceMemberId,
-        RoleResponse role
+        UUID roleId
     ) {}
 }

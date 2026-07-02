@@ -1,7 +1,8 @@
 package com.workspace.infrastructure.adapter.out.persistence.workspace.repository;
 
 import com.workspace.domain.model.workspace.WorkspaceMember;
-import com.workspace.infrastructure.adapter.out.persistence.user.repository.UserMapper;
+import com.workspace.infrastructure.adapter.out.persistence.user.entity.UserEntity;
+import com.workspace.infrastructure.adapter.out.persistence.workspace.entity.WorkspaceEntity;
 import com.workspace.infrastructure.adapter.out.persistence.workspace.entity.WorkspaceMemberEntity;
 
 
@@ -16,8 +17,8 @@ public class WorkspaceMemberMapper {
 
         return WorkspaceMember.builder()
                 .id(entity.getId())
-                .workspace(WorkspaceMapper.toDomain(entity.getWorkspace()))
-                .user(UserMapper.toDomain(entity.getUser()))
+                .workspaceId(entity.getWorkspace() != null ? entity.getWorkspace().getId() : null)
+                .userId(entity.getUser() != null ? entity.getUser().getId() : null)
                 .joinedAt(entity.getJoinedAt())
                 .build();
     }
@@ -29,8 +30,8 @@ public class WorkspaceMemberMapper {
 
         return WorkspaceMemberEntity.builder()
                 .id(domain.getId())
-                .workspace(WorkspaceMapper.toEntity(domain.getWorkspace()))
-                .user(UserMapper.toEntity(domain.getUser()))
+                .workspace(domain.getWorkspaceId() != null ? WorkspaceEntity.builder().id(domain.getWorkspaceId()).build() : null)
+                .user(domain.getUserId() != null ? UserEntity.builder().id(domain.getUserId()).build() : null)
                 .joinedAt(domain.getJoinedAt())
                 .build();
     }
